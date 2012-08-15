@@ -2,6 +2,7 @@ Classe Aljava
 =====
 
 A classe Aljava permite a criação de pequenos jogos em Java a partir dos seguintes recursos:
+
 * Desenho de formas geométricas;
 * Alteração de cor e uso de transparência;
 * Rotação da tela;
@@ -20,4 +21,27 @@ opcionalmente, você pode informar a largura e altura da tela que será exibida 
 
 ```java
 Aljava alj = new Aljava(800, 600);
+```
+
+## Classe template
+
+Principalmente para usuários do BlueJ, o objeto da classe Aljava deverá ser uma variável de instância da classe.
+O template da classe pode ser o seguinte:
+
+```java
+public class MinhaClasse {
+  //Suas outras variáveis de instânca
+  Aljava alj;
+  
+  MinhaClasse(){
+    //Inicialização das outras variáveis
+    alj = new Aljava();
+  }
+  
+  void desenho() {
+    //exemplo de desenho
+    alj.desenhaRetangulo(50, 50, 200, 200);
+    alj.mostraTela();
+  }
+}
 ```
