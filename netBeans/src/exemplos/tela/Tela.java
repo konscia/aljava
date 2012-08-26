@@ -1,7 +1,5 @@
 package exemplos.tela;
 
-import exemplos.texto.*;
-import exemplos.linhagirando.*;
 import aljava.Alj;
 
 public class Tela {

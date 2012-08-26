@@ -2,8 +2,6 @@ package aljava;
 
 import java.awt.Color;
 import java.awt.Polygon;
-import java.io.File;
-import java.util.HashMap;
 
 
 /**
@@ -172,40 +170,32 @@ public class Alj
     }
     public static class som {
 
-      public static HashMap<String, SoundEffect> mapaSons = new HashMap<String, SoundEffect>();
-
       public static void carrega(String key, String arquivoWAV){
-          if(!mapaSons.containsKey(arquivoWAV)){
-              File file = new File(arquivoWAV);
-              if(!file.exists()){
-                Alj.tela.exibeMensagem("Arquivo "+arquivoWAV+" não foi encontrado. \n\nVerifique se o nome e a extensão foram digitados corretamente.");
-              }
-              mapaSons.put(key, new SoundEffect(arquivoWAV));
+          if(!SoundManager.carrega(key, arquivoWAV)){
+              Alj.tela.exibeMensagem("Arquivo "+arquivoWAV+" não foi encontrado. \n\nVerifique se o nome e a extensão foram digitados corretamente.");
+              System.exit(0);
           }
       }
 
       public static void toca(String arquivoWAV){
-          if(mapaSons.containsKey(arquivoWAV)){
-              mapaSons.get(arquivoWAV).play();
-          } else {
+          if(!SoundManager.toca(arquivoWAV)){
               Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
+              System.exit(0);
           }
       }
 
 
       public static void loop(String arquivoWAV){
-          if(mapaSons.containsKey(arquivoWAV)){
-              mapaSons.get(arquivoWAV).playLoop();
-          }else {
+          if(!SoundManager.loop(arquivoWAV)){
               Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
+              System.exit(0);
           }
       }
 
       public static void para(String arquivoWAV){
-          if(mapaSons.containsKey(arquivoWAV)){
-              mapaSons.get(arquivoWAV).stop();
-          } else {
+          if(!SoundManager.para(arquivoWAV)){
               Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
+              System.exit(0);
           }
       }
       

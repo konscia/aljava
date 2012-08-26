@@ -7,9 +7,8 @@ package jogos.davelha;
 import aljava.Alj;
 
 public class Principal {
- 
-  public static void main(String args[]){
-    JogoDaVelha jogo = new JogoDaVelha();
-    jogo.loopJogo();
-  }
+
+    public static void main(String args[]) {
+        JogoDaVelha jogo = new JogoDaVelha();
+    }
 }
