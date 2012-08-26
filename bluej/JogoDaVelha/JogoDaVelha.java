@@ -1,6 +1,6 @@
- import aljava.Alj;
+import aljava.Alj;
 
-public class JogoDaVelha {
+class JogoDaVelha {
 
     boolean vezDoJogador1;
     Casinha[] casas;
@@ -8,12 +8,11 @@ public class JogoDaVelha {
     String jogador1;
     String jogador2;
 
-    public JogoDaVelha() {
-        Alj.tela.tamanho(300, 340);
-        Alj.som.carrega("tick", "sons/tick.wav");
-        
+    JogoDaVelha() {
+        carregaSons(); 
         vezDoJogador1 = true;
 
+        Alj.tela.exibeMensagem("Bem vindo ao Jogo da Velha do SENAI.! \nDivirta-se.");
         jogador1 = Alj.tela.solicitaTexto("Informe seu nome jogador 1.");
         jogador2 = Alj.tela.solicitaTexto("Informe seu nome jogador 2.");
         
@@ -30,8 +29,24 @@ public class JogoDaVelha {
         casas[7] = new Casinha(101, 241);
         casas[8] = new Casinha(201, 241);
 
+        Alj.tela.tamanho(300, 340);
         loopJogo();
     }
+    
+    void carregaSons(){
+        Alj.cor.nome("preto");
+        Alj.desenha.retangulo(0,0,400,400);
+        Alj.cor.nome("verde");
+        Alj.desenha.texto(20, 180, "Carregando sons, ", 20);
+        Alj.desenha.texto(20, 200, "aguarde alguns segundos.", 14);
+        Alj.tela.exibe();
+        
+        Alj.som.carrega("tick", "sons/tick.wav");
+    }
+    
+    /*************************************************/
+    /************* Coração do Jogo *******************/
+    /*************************************************/
     
     void loopJogo() {
         while (true) {
@@ -42,7 +57,7 @@ public class JogoDaVelha {
         }
     }
 
-    public void clickCasinhas() {
+    void clickCasinhas() {
         for (int i = 0; i < 9; i++) {
             if (casas[i].estaOcupada()) {
                 continue; //Isso pula para o próximo loop
@@ -56,7 +71,7 @@ public class JogoDaVelha {
         }
     }
 
-    public void ocupaCasa(Casinha casinha){
+    void ocupaCasa(Casinha casinha){
         if (vezDoJogador1) {
             casinha.ocupaPlayer1();
             vezDoJogador1 = false;
@@ -66,23 +81,36 @@ public class JogoDaVelha {
         }
     }
 
-    public void verificaVitoria(){
-        //Vitória 1a Linha Horizontal
-        if(casas[0].estaOcupadaPlayer1() && casas[1].estaOcupadaPlayer1() && casas[2].estaOcupadaPlayer1()){
-            vitoriaPlayer1();
-        }
-
-        if(casas[0].estaOcupadaPlayer2() && casas[1].estaOcupadaPlayer2() && casas[2].estaOcupadaPlayer2()){
-            vitoriaPlayer2();
-        }
-
-        //Vitória 2a Linha Horizontal
-        if(casas[3].estaOcupadaPlayer1() && casas[4].estaOcupadaPlayer1() && casas[5].estaOcupadaPlayer1()){
-            vitoriaPlayer1();
-        }
-
-        if(casas[3].estaOcupadaPlayer2() && casas[4].estaOcupadaPlayer2() && casas[5].estaOcupadaPlayer2()){
-            vitoriaPlayer2();
+    /*************************************************/
+    /********** Métodos de Vitória *******************/
+    /*************************************************/
+    
+    void verificaVitoria(){
+        int[][] possibilidadesVitoria = {
+            {0,1,2},
+            {3,4,5},
+            {6,7,8},
+            
+            {0,3,6},
+            {1,4,7},
+            {2,5,8},
+            
+            {0,4,8},
+            {2,4,6}
+        };
+        
+        for(int i = 0; i < possibilidadesVitoria.length; i++){
+           int c1 = possibilidadesVitoria[i][0];
+           int c2 = possibilidadesVitoria[i][1];
+           int c3 = possibilidadesVitoria[i][2];
+           
+           if(casas[c1].estaOcupadaPlayer1() && casas[c2].estaOcupadaPlayer1() && casas[c3].estaOcupadaPlayer1()){
+               vitoriaPlayer1();
+           }
+           
+           if(casas[c1].estaOcupadaPlayer2() && casas[c2].estaOcupadaPlayer2() && casas[c3].estaOcupadaPlayer2()){
+               vitoriaPlayer2();
+           }
         }
     }
 
@@ -96,6 +124,10 @@ public class JogoDaVelha {
         Alj.tela.finaliza();
     }
 
+    /*************************************************/
+    /********** Métodos de Desenho *******************/
+    /*************************************************/
+    
     public void desenha() {
         desenhaTopo();
         desenhaCasinhas();

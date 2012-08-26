@@ -1,10 +1,9 @@
 import aljava.Alj;
 
 /**
- *
- * @author kaleu
+ * Representa uma casinha do jogo da Velha.
  */
-public class Casinha {
+class Casinha {
 
     int x, y, largura, altura;
     //Se o valor for zero, a casa é vazia.
@@ -43,10 +42,10 @@ public class Casinha {
         int xMouse = Alj.mouse.x();
         int yMouse = Alj.mouse.y();
 
-        boolean estaDentroHorizontalmente = x < xMouse && xMouse < (x + largura);
-        boolean estaDentroVerticalmente = y < yMouse && yMouse < (y + altura);
+        boolean dentroHorizontal = x < xMouse && xMouse < (x + largura);
+        boolean dentroVertical = y < yMouse && yMouse < (y + altura);
 
-        if (estaDentroHorizontalmente && estaDentroVerticalmente) {
+        if (dentroHorizontal && dentroVertical) {
             return true;
         } else {
             return false;
