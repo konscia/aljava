@@ -7,11 +7,11 @@ Os Comandos são divididos em 8 pacotes:
 * **cor**: seleção da cor que está sendo utilizada para o desenho em diversos formatos e uso de transparência;
 * **desenho**: Desenho de formas geométricas e imagens;
 * **transforma**: Que permite o uso de rotações;
-* **tela**: com métodos para solicitar informações ao usuário, tamanho da tela, etc;
+* **tela**: com comandos para solicitar informações ao usuário, tamanho da tela, etc;
 * **som**: Permite o pré-carregamento, execução, pausa e loop de sons WAV;
 * **mouse**: Acesso ao mouse;
 * **tecla**: Acesso ao teclado;
-* **util**: Métodos utilitários como o sorteio de números aleatórios e espera.
+* **util**: comandos utilitários como o sorteio de números aleatórios e espera.
 
 ## Início
 
@@ -44,7 +44,7 @@ A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a 
 
 ## Documentação - Comandos disponíveis
 
-### Métodos de Desenho - **desenho**
+### desenho
 
 Este pacote permite o desenho de diversas formas geométricas e imagens.
 
@@ -121,7 +121,7 @@ As imagens devem estar na raiz do projeto. Sugiro que sempre use dentro da raiz 
 Alj.desenha.imagem(x, y, "imagens/Ryu.png");
 ```
 
-### Métodos de Cor e Transparência - **cor**
+### cor
 
 Todos os desenhos acima podem receber transparência ou uma cor(exceto imagens). Você pode mudar a cor de diversas formas, escolha a que preferir.
 
@@ -135,7 +135,7 @@ Alj.cor.nome("vermelho");
 As cores disponíveis são: "vermelho", "laranja", "ciano", "preto", "azul", "amarelo", "verde", "magenta" e "branco".
 
 #### Mudar cor pelo RGB
-Uma cor é formada por uma quantidade de vermelho (R), verde (G) e azul (B). Estes valores variam de 0 (mais escuro) até 255 (mais claro). Este método tem três parâmetros, um para cada das três cores e é o mais útil para criar pequenas animações com cores.
+Uma cor é formada por uma quantidade de vermelho (R), verde (G) e azul (B). Estes valores variam de 0 (mais escuro) até 255 (mais claro). Este comando tem três parâmetros, um para cada das três cores e é o mais útil para criar pequenas animações com cores.
 
 ```java
 //Alj.cor.rgb(int r, int g, int b)
@@ -165,7 +165,7 @@ Outro recurso útil é o uso de transparências. Você pode informat a transpar�
 Alj.cor.transparencia(50);
 ```
 
-### Rotação da tela - **transforma**
+### transforma (Rotação)
 A rotação é sempre aplicada diretamente ao ambiente de desenho. Desse modo, é sempre importante informar qual o eixo x, y que será utilizado para a rotação.
 
 Se você quiser uma determinada forma geométrica rotacionada, precisará rotacionar a tela usando como eixo o centro da figura, e, após o desenho, limpar a rotação para que ela não afete os próximos desenhos.
@@ -179,6 +179,69 @@ int yCentral = y + (altura / 2);
 Alj.transforma.rotaciona(90, xCentral, yCentral);
 Alj.desenha.retangulo(x, y, largura, altura);
 Alj.transforma.limpaRotacao();
+```
+
+### tela
+A Aljava é sempre baseada em uma tela. Os comandos deste pacote ajudam a trabalhar com ela e com entrada de dados que devem vir do usuário através de janelas pop-up.
+
+#### Exibir a Tela
+Todos os desenhos só serão exibidos na tela após a execução deste método. Antes disso, ficam em um buffer de desenho escondido. Isso evita que a tela fique "piscando".
+
+```java
+//Lembre-se de semrpe executar este método após desenhar qualquer coisa (que você queira ver na tela).
+Alj.tela.exibe();
+```
+
+#### Limpar
+Antes de iniciar o desenho de um novo frame da sua aplicação, você pode querer limpar a tela.
+Basicamente limpar a tela é desenhar um retângulo branco por cima de tudo. Este método é um atalho para isso.
+
+```java
+Alj.tela.limpar();
+```
+
+#### Alterar o tamanho
+A tela tem por padrão 400 pixels de largura por 400 de altura. Para alterar este tamanho, use:
+
+```java
+//Alj.tela.tamanho(int largura, int altura)
+Alj.tela.tamanho(800, 600);
+```
+
+#### Finalizar
+Para encerrar o programa e fechar a janela, execute:
+
+```java
+Alj.tela.finalizar();
+```
+
+#### Exibir Mensagem
+Frequentemente é útil exibir mensagens ao usuário como "Parabéns, você venceu.". Para isto, use:
+
+```java
+Alj.tela.exibeMensagem("Parabéns, você venceu.\n\nTente novamente.")
+```
+
+**Obs:** use \n para quebra de linha na janela.
+
+#### Solicitar Texto ao usuário
+Você também pode solicitar que o usuário lhe informe um texto qualquer, como por exemplo, o seu nome.
+
+```java
+String nome = Alj.tela.solicitaTexto("Por favor, informe seu nome.");
+```
+
+#### Solicitar Números ao usuário
+Você também pode solicitar que o usuário lhe informe um número qualquer, como por exemplo, para um par ou ímpar.
+
+```java
+int numero = Alj.tela.solicitaNumero("1, 2, 3 e já...");
+```
+
+Alternativamente, você pode solicitar um double
+
+```java
+double numero = Alj.tela.solicitaNumeroDouble("Informe o preço do produto:");
 ```
 
 ### Acesso ao Mouse
