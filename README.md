@@ -17,7 +17,7 @@ Os Comandos são divididos em 8 pacotes:
 
 ### Instalação
 
-Basta adicionar ao seu projeto o arquivo Aljava.jar na raiz do github. Ele tem tudo que é necessário.
+Basta adicionar ao seu projeto o arquivo **Aljava.jar** que está na raiz do github. Ele tem tudo que é necessário.
 
 ### Execução
 
@@ -44,7 +44,7 @@ A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a 
 
 ## Documentação - Comandos disponíveis
 
-### desenho
+### Métodos de Desenho - **desenho**
 
 Este pacote permite o desenho de diversas formas geométricas e imagens.
 
@@ -121,15 +121,65 @@ As imagens devem estar na raiz do projeto. Sugiro que sempre use dentro da raiz 
 Alj.desenha.imagem(x, y, "imagens/Ryu.png");
 ```
 
+### Métodos de Cor e Transparência - **cor**
 
-### Métodos de Cor e Transparência
+Todos os desenhos acima podem receber transparência ou uma cor(exceto imagens). Você pode mudar a cor de diversas formas, escolha a que preferir.
 
 #### Mudar cor pelo nome
-#### Mudar cor pelo RGB
-#### Mudar cor com um objeto Color
-#### Alterar a transparência
+Existem alguns nomes de cores pré-definidos que podem ser usados como uma String. Isso é útil no início do aprendizado de programação, principalmente para os primeiros exercícios.
 
-### Rotação de Tela
+```java
+Alj.cor.nome("vermelho");
+```
+
+As cores disponíveis são: "vermelho", "laranja", "ciano", "preto", "azul", "amarelo", "verde", "magenta" e "branco".
+
+#### Mudar cor pelo RGB
+Uma cor é formada por uma quantidade de vermelho (R), verde (G) e azul (B). Estes valores variam de 0 (mais escuro) até 255 (mais claro). Este método tem três parâmetros, um para cada das três cores e é o mais útil para criar pequenas animações com cores.
+
+```java
+//Alj.cor.rgb(int r, int g, int b)
+Alj.cor.rgb(200, 100, 78);
+```
+#### Hexadecimal #006699
+Desenvolvedores que tenham conhecimento de web e estejam acostumados com o formato hexadecimal, podem usá-lo também.
+Qualquer cor hexadecimal pode ser informada como uma String.
+
+```java
+//Alj.cor.hexadecimal(String hexadecimal);
+Alj.cor.hexadecimal("#336699");
+```
+
+#### Objeto Color
+Desenvolvedores mais avançados podem usar um objeto da classe Color do Java.
+
+```java
+Alj.cor.objeto( new Color(200,100,10) );
+```
+
+#### Alterar a transparência
+Outro recurso útil é o uso de transparências. Você pode informat a transparência com uma porcentagem que varia de 0 até 100. Quanto maior o valor, maior a transparência.
+
+```java
+//Alj.cor.transparencia(int porcentagem);
+Alj.cor.transparencia(50);
+```
+
+### Rotação da tela - **transforma**
+A rotação é sempre aplicada diretamente ao ambiente de desenho. Desse modo, é sempre importante informar qual o eixo x, y que será utilizado para a rotação.
+
+Se você quiser uma determinada forma geométrica rotacionada, precisará rotacionar a tela usando como eixo o centro da figura, e, após o desenho, limpar a rotação para que ela não afete os próximos desenhos.
+
+Exemplo de um losango
+
+```java
+int xCentral = x + (largura / 2);
+int yCentral = y + (altura / 2);
+
+Alj.transforma.rotaciona(90, xCentral, yCentral);
+Alj.desenha.retangulo(x, y, largura, altura);
+Alj.transforma.limpaRotacao();
+```
 
 ### Acesso ao Mouse
 
