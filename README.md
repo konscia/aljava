@@ -244,17 +244,132 @@ Alternativamente, você pode solicitar um double
 double numero = Alj.tela.solicitaNumeroDouble("Informe o preço do produto:");
 ```
 
-### Acesso ao Mouse
+### som
 
-#### Click botão esquerdo
-#### Click botão direito
-#### Posicao do Click
-#### Posicao do Mouse
+Basicamente para trabalhar com sons é nessário tocá-los, pausá-los e repetí-los. É isso que estes comandos fazem.
+Outro ponto importante é que os sons precisam ser carregados previamente e esse processo pode demorar alguns segundos.
 
-### Acesso ao Teclado
+É uma boa prática desenhar uma mensagem ou imagem informando que o som está sendo carregado, e só depois, mudar para a imagem do jogo.
 
-#### Ver se tecla está pressionada pela String
-#### Ver se a tecla está pressionada pelo código
+Os sons devem estar sempre na pasta raiz da aplicação, exatamente igual as imagens.
+
+**Obs**: a lib só aceita sons no formato WAV.
+
+#### Carregando sons
+
+Quando carrega um som para a memória você deve informar uma chave para esse som. Será por essa chave que você poderá acessá-lo para tocá-lo ou pausá-lo. O segundo parâmetro é o nome do arquivo de som.
+
+```java
+Alj.som.carrega("golpe", "sounds/golpe.wav");
+Alj.som.carrega("golpe2", "sounds/golpe2.wav");
+```
+
+#### Executando sons
+
+```java
+Alj.som.toca("golpe");
+```
+
+Opcionalmente, você pode executar um som em loop
+
+```java
+Alj.som.loop("golpe2");
+```
+
+#### Pausando sons
+
+```java
+Alj.som.para("golpe2");
+``` 
+
+### mouse
+
+O mouse é um dos recursos que possibilita maior interação com o usuário.
+Sempre que necessário você pode pegar a posicão x, y do mouse com os métodos:
+
+```java
+int x = Alj.mouse.x();
+int y = Alj.mouse.y();
+```
+
+E pode ver também se um dos dois botões foram pressionados
+
+```java
+if( Alj.mouse.clickE() ){
+	Alj.tela.exibeMensagem("Você pressionou o botão esquerdo");
+}
+
+if( Alj.mouse.clickD() ){
+	Alj.tela.exibeMensagem("Você pressionou o botão direito");
+}
+```
+
+### tecla
+
+Por enquanto a Aljava só permite saber se em um dado momento, uma tecla está ou não pressionada.
+
+```java
+if( Alj.tecla.press("esquerda") ){
+	moveHorizontal(-10);
+}
+	
+if( Alj.tecla.press("direita") ){
+	moveHorizontal(+10);
+}
+
+if( Alj.tecla.press("cima") ){
+	moveVertical(-10);
+}
+	
+if( Alj.tecla.press("baixo") ){
+	moveVertical(+10);
+}
+```
+
+As teclas disponíveis com String são: "enter", "espaco", "esquerda", "direita", "cima","baixo", "w", "a", "s", "d", "z", "x" e "p".
+
+Alternativamente, você pode usar o código da tecla
+
+```java
+if( Alj.tecla.press( KeyEvent.VK_SPACE ) ){
+	lancaEspecial();
+}
+```
+
+### util
+
+Reunião de comandos úteis que não se encaixam em nenhum dos pacotes anteriores.
+
+#### Espera
+
+Em jogos, é muito comum precisarmos pedir para o computador esperar alguns instantes antes de executar uma ação ou partir para o frame seguinte do jogo. Podemos fazer isso, esperando alguns milisegundos com:
+
+```java
+Alj.util.espera(500);
+```
+
+#### Números aleatórios
+
+Você pode sortear um número entre um mínimo e um máximo. 
+
+```java
+int num = Alj.util.sorteia(1, 10);
+```
+
+Alternativamente, você pode sortear um double passando valores double como parâmetros
+
+```java
+double num = Alj.util.sorteia(1.5, 3.5);
+```
+
+## Conclusão
+
+Ao todo, são 37 comandos. Todos com o mesmo objetivo de tornar a programação em java um pouco mais divertida e prazerosa ara quem está começando.
+
+Assim, nossos primeiros programas podem ganhar um pouco mais de vida e dinamismo e o ensino fica melhor também para o professor que pode ir muito além do tradicional.
+
+E tudo isso, ainda usando Java, uma linguagem poderosa e profissional.
+Espero que gostem.
 
 ## Inspiração e agradecimentos
 
@@ -262,6 +377,8 @@ double numero = Alj.tela.solicitaNumeroDouble("Informe o preço do produto:");
 
 Ao SENAI são José e à Márcia Cristina (coordenadora) pela confiança e pelo excepcional trabalho como coordenadora do curso técnico de programação articulado com o ensino médio.
 
-Aos projetos BlueJ, Greenfoot e idraw.
+Aos projetos BlueJ, Greenfoot, idraw e Processing.
 
 Ao orientador do meu TCC, professor Ricardo Pereira e Silva, UFSC e aos demais professores do curso de Sistemas de Informação que contribuíram para o meu aprendizado e desenvolvimento.
+
+Por fim, à minha amada família, Suélen e Kainan, simplesmente pelo que são.!
