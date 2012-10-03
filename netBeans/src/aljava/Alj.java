@@ -1,7 +1,9 @@
 package aljava;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 
 
 /**
@@ -112,6 +114,10 @@ public class Alj
       
       public static void imagem(int x, int y, String imgFileName){
         alj.desenhaImagem(x, y, imgFileName);
+      }
+
+      public static void imagem(int x, int y, Image image){
+        alj.desenhaImagem(x, y, image);
       }
     
     }

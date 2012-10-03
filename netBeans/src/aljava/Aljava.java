@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.util.*;
 
 import java.awt.event.KeyEvent;
@@ -204,6 +205,16 @@ public class Aljava
         System.err.println("Erro na carga da imagem \""+imgFileName+"\". Verifique se o caminho informado está correto.");
         System.exit(0);
       }
+    }
+
+    public void desenhaImagem(int x, int y, Image image) {
+        x = canvas.getStartX() + x;
+        y = canvas.getStartY() + y;
+
+        Graphics2D g2d = canvas.getGameGraphics();
+        antesDeDesenhar(g2d);
+        g2d.drawImage(image, x, y, null);
+        depoisDeDesenhar(g2d);
     }
     
     public void rotaciona(int angulo, int xCentral, int yCentral){ 

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Nave()
+comment1.params=
+comment1.target=void\ moveEsquerda()
+comment2.params=
+comment2.target=void\ moveDireita()
+comment3.params=
+comment3.target=void\ moveCima()
+comment4.params=
+comment4.target=void\ moveBaixo()
+comment5.params=
+comment5.target=void\ desenha()
+numComments=6
