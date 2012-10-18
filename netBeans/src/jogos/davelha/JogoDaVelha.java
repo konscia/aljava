@@ -1,6 +1,7 @@
 package jogos.davelha;
 
 import aljava.Alj;
+import aljava.Som;
 
 public class JogoDaVelha {
 
@@ -9,6 +10,8 @@ public class JogoDaVelha {
 
     String jogador1;
     String jogador2;
+
+    Som tick;
 
     public JogoDaVelha() {
         carregaSons();
@@ -39,7 +42,7 @@ public class JogoDaVelha {
         Alj.desenha.texto(20, 200, "Carregando sons, aguarde alguns segundos.", 18);
         Alj.tela.exibe();
 
-        Alj.som.carrega("tick", "sons/tick.wav");
+        tick = new Som("sons/tick.wav");
     }
 
     void loopJogo() {
@@ -60,7 +63,7 @@ public class JogoDaVelha {
             //Se o mose está na casinha e o botao esquerdo pressionado, ocupa casa
             if (casas[i].mouseDentro() && Alj.mouse.clickE()) {
                 ocupaCasa( casas[i] );
-                Alj.som.toca("tick");
+                tick.toca();
             }
         }
     }
