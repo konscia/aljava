@@ -1,6 +1,7 @@
 package aljava;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
@@ -115,10 +116,6 @@ public class Alj
       public static void imagem(int x, int y, String imgFileName){
         alj.desenhaImagem(x, y, imgFileName);
       }
-
-      public static void imagem(int x, int y, Image image){
-        alj.desenhaImagem(x, y, image);
-      }
     
     }
     
@@ -174,38 +171,19 @@ public class Alj
         return alj.sorteiaNumero(min, max);
       }
     }
-    public static class som {
 
-      public static void carrega(String key, String arquivoWAV){
-          if(!SoundManager.carrega(key, arquivoWAV)){
-              Alj.tela.exibeMensagem("Arquivo "+arquivoWAV+" não foi encontrado. \n\nVerifique se o nome e a extensão foram digitados corretamente.");
-              System.exit(0);
-          }
+    public static class avancado {
+
+      public static Graphics2D getGraphics(){
+        return alj.getCanvas().getGameGraphics();
       }
 
-      public static void toca(String arquivoWAV){
-          if(!SoundManager.toca(arquivoWAV)){
-              Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
-              System.exit(0);
-          }
+      public static Canvas getCanvas(){
+        return alj.getCanvas();
       }
 
-
-      public static void loop(String arquivoWAV){
-          if(!SoundManager.loop(arquivoWAV)){
-              Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
-              System.exit(0);
-          }
-      }
-
-      public static void para(String arquivoWAV){
-          if(!SoundManager.para(arquivoWAV)){
-              Alj.tela.exibeMensagem("Som "+arquivoWAV+" não foi previamente carregado.");
-              System.exit(0);
-          }
-      }
-      
     }
+
     
     public static class mouse {
       

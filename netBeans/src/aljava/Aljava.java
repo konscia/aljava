@@ -104,6 +104,10 @@ public class Aljava
         limpaTela();
         mostraTela();
     }
+
+    public Canvas getCanvas(){
+        return this.canvas;
+    }
     
     /************************/
     /** Métodos de Desenho **/
@@ -398,12 +402,12 @@ public class Aljava
     
     public int sorteiaNumero(int min, int max){
         Random sorteador = new Random();
-        return min + sorteador.nextInt(max);
+        return (min + sorteador.nextInt(max-min));
     }
     
     public double sorteiaNumero(double min, double max){
         Random sorteador = new Random();
-        return min + (sorteador.nextDouble()*max);
+        return min + (sorteador.nextDouble()*(max-min));
     }
     
     /**

@@ -6,6 +6,7 @@
 package exemplos.som;
 
 import aljava.Alj;
+import aljava.Som;
 
 /**
  *
@@ -15,23 +16,22 @@ public class Principal {
 
     public static void main(String args[]){
         System.out.println("Carregando Sons");
-        Alj.som.carrega("golpe", "sounds/golpe.wav");
-        Alj.som.carrega("golpe2", "sounds/golpe2.wav");
-        Alj.som.carrega("comeon", "sounds/comeon.wav");
+        Som golpe = new Som("sons/som4.wav");
 
-        System.out.println("Som 1");
-        Alj.som.toca("golpe");
-        Alj.util.espera(1000);
+        while(true){
+            if(Alj.mouse.clickE()){
+                Som golpeTemp = new Som("sons/som4.wav");
+                golpeTemp.toca();
 
-        System.out.println("Som 2");
-        Alj.som.toca("golpe2");
-        Alj.util.espera(1000);
+                //golpe.toca();
+                Alj.util.espera(200);
+            }
 
-        System.out.println("Som 3 - Loop");
-        Alj.som.loop("comeon");
-        Alj.util.espera(3000);
+            if(Alj.mouse.clickD()){
+                 System.exit(0);
+            }
 
-        System.out.println("Som 3 - Para");
-        Alj.som.para("comeon");
+
+        }
     }
 }

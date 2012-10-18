@@ -1,56 +1,60 @@
 package aljava;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import javax.sound.sampled.*;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-
-//Read more: http://javafree.uol.com.br/topic-879623-Executar-wav.html#ixzz24f7Flwpl
+/**
+ * This enum encapsulates all the sound effects of a game, so as to separate the sound playing
+ * codes from the game codes.
+ * 1. Define all your sound effect names and the associated wave file.
+ * 2. To play a specific sound, simply invoke Som.SOUND_NAME.play().
+ * 3. You might optionally invoke the static method Som.init() to pre-load all the
+ *    sound files, so that the play is not paused while loading the file for the first time.
+ * 4. You can use the static variable Som.volume to mute the sound.
+ */
 public class Som {
+   // Each sound effect has its own clip, loaded with its own sound file.
+   private Clip clip;
 
-    public static void tocar(String filename, boolean repetir){
-        try {
-            InputStream file = (InputStream) new FileInputStream(filename);
-            Som.tocar(file, repetir);
-        } catch (FileNotFoundException ex) {
-           ex.printStackTrace();
-        }
-    }
+   // Constructor to construct each element of the enum with its own sound file.
+   public Som(String soundFileName) {
+      try {
+         // Use URL (instead of File) to read from disk and JAR.
+         File url = new File(soundFileName);
+         // Set up an audio input stream piped from the sound file.
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+         // Get a clip resource.
+         clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+         clip.open(audioInputStream);
+      } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+   }
 
-    // Toca um som
-    public static void tocar(final InputStream arquivo, final boolean repetir) {
-        try {
-            // Obtém os dados sonoros
-            final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(arquivo);
-            Clip clip = AudioSystem.getClip();
-            clip.addLineListener(new LineListener() {
+   // Play or Re-play the sound effect from the beginning, by rewinding.
+   public void toca() {
+     if (clip.isRunning())
+        clip.stop();   // Stop the player if it is still running
+     clip.setFramePosition(0); // rewind to the beginning
+     clip.start();     // Start playing
+   }
 
-                // Evento do LineListener
-                public void update(final LineEvent e) {
-                    if (e.getType() == LineEvent.Type.STOP) {
-                        e.getLine().close();
-                    }
-                }
-            });
-            clip.open(audioInputStream);
+   public void loop() {
+     if (clip.isRunning())
+        clip.stop();   // Stop the player if it is still running
+     clip.setFramePosition(0); // rewind to the beginning
+     clip.loop(Clip.LOOP_CONTINUOUSLY);    // Start playing
+   }
 
-            // Toca o som
-            if (repetir){
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                clip.loop(0);
-            }
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-    }
+   public void pausa() {
+     if (clip.isRunning())
+        clip.stop();   // Stop the player if it is still running
+     clip.setFramePosition(0); // rewind to the beginning
+   }
 }
-
-

@@ -1,30 +1,50 @@
 package aljava;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
-/**
- * eSTA CLASSE ENCAPSULA UMA BuferredImage e a desenha utilizando o Aljava.
- */
 public class Imagem {
+    private Image image;
+    private boolean invertida = false;
 
-    BufferedImage image;
-
-    public Imagem(String caminhoParaImagem){
-        try {
-            image = ImageIO.read(new File(caminhoParaImagem));
-        } catch (IOException ex) {
-           System.err.println("Erro na carga da imagem \""+caminhoParaImagem+"\". Verifique se o caminho informado está correto.");
-           System.exit(0);
-        } 
+    public Imagem(String filename)
+    {
+        image = Toolkit.getDefaultToolkit().getImage(filename);   
     }
 
-    public void desenha(int x, int y){
-        Alj.desenha.imagem(x, y, image);
+	public int pegaLargura() {
+		return image.getWidth(null);
+	}
+
+	public int pegaAltura() {
+		return image.getHeight(null);
+	}
+
+    public void inverte(){
+        this.invertida = !this.invertida;
     }
+
+    public void alteraTamanho(int largura, int altura){
+        image = image.getScaledInstance(largura, altura, Image.SCALE_DEFAULT);
+    }
+    
+	public void desenha(int x, int y) {
+        if(this.invertida){
+            this.desenhaInvertida(x, y);
+        } else {
+            Alj.avancado.getGraphics().drawImage(image, x, y, null);
+        }
+	}
+
+     public void desenhaInvertida(int x, int y) {
+		Alj.avancado.getGraphics().drawImage(image, image.getWidth(null) + x, y, x,
+				image.getHeight(null) + y, 0, 0, image.getWidth(null),
+				image.getHeight(null), null);
+	}
+
 
 }
