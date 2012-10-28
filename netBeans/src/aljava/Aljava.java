@@ -1,5 +1,8 @@
 package aljava;
 
+import aljava.saida.Tela;
+import aljava.entrada.Mouse;
+import aljava.entrada.Teclado;
 import java.awt.Color;
 import java.awt.Polygon;
 import java.awt.Font;
@@ -11,8 +14,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.util.*;
-
-import java.awt.event.KeyEvent;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -44,9 +45,9 @@ import javax.swing.SwingUtilities;
  */
 public class Aljava
 {
-    private Canvas canvas;
+    private Tela canvas;
     private Mouse mouse;
-    private Keyboard keyboard;
+    private Teclado teclado;
     
     private Color cor;
     private int transparencia = 0;
@@ -90,14 +91,13 @@ public class Aljava
         GraphicsDevice graphDevice = graphEnv.getDefaultScreenDevice();
         GraphicsConfiguration graphicConf = graphDevice.getDefaultConfiguration();
 
-        canvas = new Canvas(graphicConf, width, height);
+        canvas = new Tela(graphicConf, width, height);
 
         mouse = new Mouse();
-        keyboard = new Keyboard();
+        mouse.observa(canvas);
 
-        canvas.addMouseListener(mouse);
-        canvas.addMouseMotionListener(mouse);
-        canvas.addKeyListener(keyboard);
+        teclado = new Teclado();
+        teclado.observa(canvas);
         
         cor = Color.black;
         
@@ -105,7 +105,7 @@ public class Aljava
         mostraTela();
     }
 
-    public Canvas getCanvas(){
+    public Tela getCanvas(){
         return this.canvas;
     }
     
@@ -128,7 +128,7 @@ public class Aljava
         xFinal = canvas.getStartX() + xFinal;
         yFinal = canvas.getStartY() + yFinal;
         
-        Graphics2D g2d = canvas.getGameGraphics();
+        Graphics2D g2d = canvas.getGraphics();
         antesDeDesenhar(g2d);
         
         g2d.drawLine(xInicial, yInicial, xFinal, yFinal);
@@ -139,7 +139,7 @@ public class Aljava
     public void desenhaCirculo(int x, int y, int largura, int altura){  
         x = canvas.getStartX() + x;
         y = canvas.getStartY() + y;
-        Graphics g = canvas.getGameGraphics();
+        Graphics g = canvas.getGraphics();
         Graphics2D g2d = (Graphics2D)g;
         execRotate(g2d);
         g.setColor(cor);
@@ -150,7 +150,7 @@ public class Aljava
     public void desenhaRetangulo(int x, int y, int largura, int altura){   
         x = canvas.getStartX() + x;
         y = canvas.getStartY() + y;
-        Graphics g = canvas.getGameGraphics();
+        Graphics g = canvas.getGraphics();
         Graphics2D g2d = (Graphics2D)g;
         execRotate(g2d);
         g2d.setColor(cor);
@@ -170,7 +170,7 @@ public class Aljava
     }
     
     public void desenhaPoligono(Polygon poligono){   
-        Graphics g = canvas.getGameGraphics();
+        Graphics g = canvas.getGraphics();
         Graphics2D g2d = (Graphics2D)g;
         execRotate(g2d);
         g2d.setColor(cor);
@@ -182,7 +182,7 @@ public class Aljava
         x = canvas.getStartX() + x;
         y = canvas.getStartY() + y;
         
-        Graphics g = canvas.getGameGraphics();
+        Graphics g = canvas.getGraphics();
         Graphics2D g2d = (Graphics2D)g;
         g2d.setColor(cor);
         
@@ -200,7 +200,7 @@ public class Aljava
         x = canvas.getStartX() + x;
         y = canvas.getStartY() + y;
 
-        Graphics2D g2d = canvas.getGameGraphics();        
+        Graphics2D g2d = canvas.getGraphics();
         antesDeDesenhar(g2d);
         g2d.drawImage(image, x, y, null); 
         depoisDeDesenhar(g2d);
@@ -215,7 +215,7 @@ public class Aljava
         x = canvas.getStartX() + x;
         y = canvas.getStartY() + y;
 
-        Graphics2D g2d = canvas.getGameGraphics();
+        Graphics2D g2d = canvas.getGraphics();
         antesDeDesenhar(g2d);
         g2d.drawImage(image, x, y, null);
         depoisDeDesenhar(g2d);
@@ -236,68 +236,39 @@ public class Aljava
     }
     
     /**********************/
-    /** Métodos do Mouse **/
+    /** Métodos do MouseObserver **/
     /**********************/
     
     public boolean mouseBotaoEsquerdoEstaPressionado(){        
-        return mouse.isLeftButtonPressed();
+        return mouse.botaoEsquerdoPressionado();
     }
     
     public boolean mouseBotaoDireitoEstaPressionado(){
-        return mouse.isRightButtonPressed();
+        return mouse.botaoDireitoPressionado();
+    }
+
+    public boolean mouseBotaoMeioEstaPressionado(){
+        return mouse.botaoMeioPressionado();
     }
     
     public int mousePegaPosicaoClickX(){
-        return (int)(mouse.getMousePos().getX()-canvas.getStartX());
+        return (int)(mouse.pegaX() - canvas.getStartX());
     }
     
     public int mousePegaPosicaoClickY(){
-        return (int)(mouse.getMousePos().getY()-canvas.getStartY());
+        return (int)(mouse.pegaY()-canvas.getStartY());
     }
     
     /*************/
     /** keyboard **/
     /*************/
     
-    public boolean teclaEstaPressionada(String tecla){
-        int keyCode = 0;
-        if(tecla.equals("enter")){
-            keyCode = KeyEvent.VK_ENTER;
-        } else if(tecla.equals("espaco")){
-            keyCode = KeyEvent.VK_SPACE;
-        } else if(tecla.equals("esquerda")){
-            keyCode = KeyEvent.VK_LEFT;
-        } else if(tecla.equals("direita")){
-            keyCode = KeyEvent.VK_RIGHT;
-        } else if(tecla.equals("cima")){
-            keyCode = KeyEvent.VK_UP;
-        } else if(tecla.equals("baixo")){
-            keyCode = KeyEvent.VK_DOWN;
-        } else if(tecla.equals("a")){
-            keyCode = KeyEvent.VK_A;
-        } else if(tecla.equals("s")){
-            keyCode = KeyEvent.VK_S;
-        } else if(tecla.equals("d")){
-            keyCode = KeyEvent.VK_D;
-        } else if(tecla.equals("w")){
-            keyCode = KeyEvent.VK_W;
-        } else if(tecla.equals("p")){
-            keyCode = KeyEvent.VK_P;
-        } else if(tecla.equals("x")){
-            keyCode = KeyEvent.VK_X;
-        } else if(tecla.equals("z")){
-            keyCode = KeyEvent.VK_Z;
-        }else {
-            System.err.println("Tecla: \""+tecla+"\" nao reconhecida. as teclas permitidas sao:");
-            System.err.println("\"enter\", \"espaco\", \"esquerda\", \"direita\", \"cima\" e \"baixo\"");
-            System.err.println("\"w\", \"a\", \"s\", \"d\", \"z\", \"x\", \"p\"");
-            return false;
-        }
-        return keyboard.keyDown(keyCode);
+    public boolean teclaEstaPressionada(String tecla){        
+        return teclado.teclaPressionada(tecla);
     }
     
     public boolean teclaEstaPressionada(int code){
-      return keyboard.keyDown(code);              
+      return teclado.teclaPressionada(code);
     }
     
     /**************************************/
@@ -377,7 +348,7 @@ public class Aljava
     public void limpaTela(){
         int x = canvas.getStartX();
         int y = canvas.getStartY();
-        Graphics g = canvas.getGameGraphics();
+        Graphics g = canvas.getGraphics();
         g.setColor(Color.white);
         g.fillRect(x, y, canvas.getLargura(), canvas.getAltura());
     }
@@ -393,7 +364,7 @@ public class Aljava
      * a canvas que estapa sendo visualizada fica aguardando novos desenhos.
      */
     public void mostraTela(){    
-        canvas.swapBuffers();
+        canvas.trocaBuffers();
     }
     
     public void alteraTamanho(int largura, int altura){

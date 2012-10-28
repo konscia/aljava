@@ -1,4 +1,4 @@
-package aljava;
+package aljava.entrada;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -8,14 +8,14 @@ import java.awt.event.MouseMotionListener;
 /**
  * Classe responsável por gerenciar questões do mouse.
  */
-public class Mouse implements MouseMotionListener, MouseListener
+package class MouseObserver implements MouseMotionListener, MouseListener
 {
     private Point mousePos;
     private boolean leftButtonPressed;
     private boolean middleButtonPressed;
     private boolean rightButtonPressed;
 
-    public Mouse()
+    public MouseObserver()
     {
         mousePos = new Point(0, 0);
         leftButtonPressed = false;
@@ -23,35 +23,29 @@ public class Mouse implements MouseMotionListener, MouseListener
         rightButtonPressed = false;
     }
 
-    public Point getMousePos()
-    {
+    public Point getMousePos(){
         return mousePos;
     }
 
-    public boolean isLeftButtonPressed()
-    {
+    public boolean isLeftButtonPressed() {
         return leftButtonPressed;
     }
 
-    public boolean isMiddleButtonPressed()
-    {
+    public boolean isMiddleButtonPressed(){
         return middleButtonPressed;
     }
 
-    public boolean isRightButtonPressed()
-    {
+    public boolean isRightButtonPressed(){
         return rightButtonPressed;
     }
 
-    public void mouseClicked(MouseEvent e)
-    {
-        
-    }
+    @Override
+    public void mouseClicked(MouseEvent e){}
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
-        switch(e.getButton())
-        {
+        switch(e.getButton()){
             case MouseEvent.BUTTON1:
                 leftButtonPressed = ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0);
                 break;
@@ -64,10 +58,10 @@ public class Mouse implements MouseMotionListener, MouseListener
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
-        switch(e.getButton())
-        {
+        switch(e.getButton()){
             case MouseEvent.BUTTON1:
                 leftButtonPressed = ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0);
                 break;
@@ -80,23 +74,20 @@ public class Mouse implements MouseMotionListener, MouseListener
         }
     }
 
-    public void mouseEntered(MouseEvent e)
-    {
-        
+    @Override
+    public void mouseEntered(MouseEvent e){}
+
+    @Override
+    public void mouseExited(MouseEvent e){}
+
+    @Override
+    public void mouseDragged(MouseEvent e){
+        mouseClicked(e);
+        mouseMoved(e);
     }
 
-    public void mouseExited(MouseEvent e)
-    {
-        
-    }
-
-    public void mouseDragged(MouseEvent e)
-    {
-        
-    }
-
-    public void mouseMoved(MouseEvent e)
-    {
+    @Override
+    public void mouseMoved(MouseEvent e){
         mousePos = e.getPoint();
     }
 

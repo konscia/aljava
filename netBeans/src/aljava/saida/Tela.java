@@ -1,4 +1,4 @@
-package aljava;
+package aljava.saida;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,18 +8,20 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
-public class Canvas extends JFrame
+public class Tela extends JFrame
 {
     private final int defaultScreenWidth = 7;
     private final int defaultScreenHeight = 33;
-    private Graphics g;
-    private BufferStrategy bf;
-    private int renderScreenStartX;
-    private int renderScreenStartY;
     private int largura;
     private int altura;
 
-    public Canvas(GraphicsConfiguration gc, int width, int height)
+    private Graphics g;
+    private BufferStrategy bf;
+
+    private int renderScreenStartX;
+    private int renderScreenStartY;
+
+    public Tela(GraphicsConfiguration gc, int width, int height)
     {
         super(gc);
         this.largura = width;
@@ -62,7 +64,8 @@ public class Canvas extends JFrame
         return renderScreenStartY;
     }
 
-    public Graphics2D getGameGraphics()
+    @Override
+    public Graphics2D getGraphics()
     {        
         g = bf.getDrawGraphics();
         Graphics2D g2d = (Graphics2D) g;
@@ -72,7 +75,7 @@ public class Canvas extends JFrame
         return g2d;
     }
 
-    public void swapBuffers()
+    public void trocaBuffers()
     {
         bf.show();
         g.dispose();       

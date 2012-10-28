@@ -1,5 +1,6 @@
 package aljava;
 
+import aljava.saida.Tela;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -178,10 +179,10 @@ public class Alj
     public static class avancado {
 
       public static Graphics2D getGraphics(){
-        return alj.getCanvas().getGameGraphics();
+        return alj.getCanvas().getGraphics();
       }
 
-      public static Canvas getCanvas(){
+      public static Tela getCanvas(){
         return alj.getCanvas();
       }
 
@@ -201,7 +202,11 @@ public class Alj
       public static boolean clickE(){
         return alj.mouseBotaoEsquerdoEstaPressionado();
       }
-      
+
+      public static boolean clickM(){
+        return alj.mouseBotaoMeioEstaPressionado();
+      }
+
       public static boolean clickD(){
         return alj.mouseBotaoDireitoEstaPressionado();
       }

@@ -1,6 +1,6 @@
 package aljava.midia;
 
-import util.ContadorTempo;
+import aljava.util.ContadorTempo;
 
 /**
  * Gerencia imagens GIF que devem parar a exibição após um determinado tempo.

@@ -3,7 +3,7 @@ package aljava.midia;
 import aljava.Alj;
 import java.awt.Image;
 import java.awt.Toolkit;
-import util.CarregadorMidia;
+import aljava.util.CarregadorMidia;
 
 public class Imagem {
     protected Image image;

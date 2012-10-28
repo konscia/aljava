@@ -1,5 +1,5 @@
 
-package util;
+package aljava.util;
 
 import aljava.Alj;
 import java.awt.Image;

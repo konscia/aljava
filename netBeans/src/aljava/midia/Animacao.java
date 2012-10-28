@@ -1,7 +1,7 @@
 package aljava.midia;
 
 import java.util.LinkedList;
-import util.ContadorTempo;
+import aljava.util.ContadorTempo;
 
 /**
  * Uma animação consiste em uma sequencia de imagens executadas com um intervalo de tempo definido pelo usuário.
