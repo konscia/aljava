@@ -1,4 +1,4 @@
-package aljava;
+package util;
 
 public class ContadorTempo {
 
@@ -12,6 +12,10 @@ public class ContadorTempo {
 
     public boolean terminou(){
         return (  this.tempoPassado() > limiteTempo );
+    }
+
+    public void reinicia(){
+        milisegundosInicial = System.currentTimeMillis();
     }
 
     public int tempoPassado(){

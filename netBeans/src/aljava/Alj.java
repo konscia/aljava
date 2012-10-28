@@ -33,6 +33,9 @@ public class Alj
 {
     private static Aljava alj = new Aljava(400, 400);       
 
+    /**
+     * Pacote responsável por transformações gerais no desenho como aplicação de escala e rotação.
+     */
     public static class transforma {
       
       public static void rotaciona(int angulo, int xCentral, int yCentral){
