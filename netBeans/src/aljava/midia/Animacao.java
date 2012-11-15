@@ -50,6 +50,20 @@ public class Animacao {
         }
     }
 
+    /** Métodos de Acesso **/
+
+    public Imagem pegaImagemAtual(){
+        return imagens.get(imagemAtual);
+    }
+
+    public int pegaAltura(){
+        return pegaImagemAtual().pegaAltura();
+    }
+
+    public int pegaLargura(){
+        return pegaImagemAtual().pegaLargura();
+    }
+
      /** Controle da Animação **/
 
     public void inicia(){
@@ -103,7 +117,7 @@ public class Animacao {
 
     public void desenha(int x, int y){
         if(emExecucao){
-            imagens.get(imagemAtual).desenha(x, y);
+            pegaImagemAtual().desenha(x, y);
         }
     }
 }

@@ -1,5 +1,5 @@
 package aljava.util;
 
-public enum Direction {
+public enum Direcao {
     ESQUERDA, DIREITA, CIMA, BAIXO
 }

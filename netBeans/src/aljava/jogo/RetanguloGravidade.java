@@ -1,16 +1,12 @@
 package aljava.jogo;
 
-import aljava.Alj;
-import aljava.util.Direction;
-import java.awt.Point;
-import java.awt.Rectangle;
-
 public class RetanguloGravidade extends Retangulo {
 
     public static int CHAO = 400;
     public static double GRAVIDADE = 1;
     
     protected double velocidade;
+    boolean parado = false;
 
     public RetanguloGravidade(int _x, int _y, int _largura, int _altura){
         super(_x, _y, _largura, _altura);
@@ -18,6 +14,9 @@ public class RetanguloGravidade extends Retangulo {
     }
 
     public void processa(){
+        if(parado){
+            return;
+        }
         velocidade -= RetanguloGravidade.GRAVIDADE;
         moveY( (int)-velocidade );
         
@@ -28,7 +27,7 @@ public class RetanguloGravidade extends Retangulo {
     }
 
     public boolean chegouNoChao(){
-        return (pegaY() >= pegaChaoReal());
+        return ((pegaY() >= pegaChaoReal()));
     }
 
     public int pegaChaoReal(){
@@ -36,9 +35,31 @@ public class RetanguloGravidade extends Retangulo {
     }
 
     public void pula(int forca){
-        if(chegouNoChao()){
+        if(chegouNoChao() || parado){
             velocidade = forca;
+            parado = false;
         }
+    }
+
+    public void paraSubida(){
+        velocidade = 0;
+    }
+
+    public void para(){
+        velocidade = 0;
+        parado = true;
+    }
+
+    public void saiuDoChao(){
+        parado = false;
+    }
+
+    public boolean estaSubindo(){
+        return velocidade > 0;
+    }
+
+    public boolean estaDescendo(){
+        return velocidade < 0;
     }
 
 }

@@ -4,6 +4,7 @@ import aljava.saida.Tela;
 import aljava.entrada.Mouse;
 import aljava.entrada.Teclado;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Polygon;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -155,6 +156,17 @@ public class Aljava
         execRotate(g2d);
         g2d.setColor(cor);
         g2d.fillRect(x, y, largura, altura);
+        eraseRotate(g2d);
+    }
+
+    public void desenhaRetanguloBorda(int x, int y, int largura, int altura){
+        x = canvas.getStartX() + x;
+        y = canvas.getStartY() + y;
+        Graphics g = canvas.getGraphics();
+        Graphics2D g2d = (Graphics2D)g;
+        execRotate(g2d);
+        g2d.setColor(cor);
+        g2d.drawRect(x, y, largura, altura);
         eraseRotate(g2d);
     }
     
@@ -367,8 +379,8 @@ public class Aljava
         canvas.trocaBuffers();
     }
     
-    public void alteraTamanho(int largura, int altura){
-      canvas.tamanho(largura, altura);
+    public void alteraTamanho(final int largura, final int altura){
+        canvas.tamanho(largura, altura);                  
     }
     
     public int sorteiaNumero(int min, int max){

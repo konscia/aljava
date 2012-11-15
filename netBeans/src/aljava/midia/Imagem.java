@@ -15,6 +15,10 @@ public class Imagem {
     public Imagem(String filename) {
         image = Toolkit.getDefaultToolkit().getImage(filename);
         CarregadorMidia.instancia().esperaCarregar(image);
+        if(image.getWidth(null) == -1){
+            System.err.println("A imagem \""+filename+"\" não foi enocntrada.");
+            System.exit(0);
+        }
         originalImage = image;
     }
 
@@ -55,6 +59,9 @@ public class Imagem {
     }
     
 	public void desenha(int x, int y) {
+        x += Alj.avancado.getCanvas().getStartX();
+        y += Alj.avancado.getCanvas().getStartY();
+
         if(this.invertida){
             this.desenhaInvertida(x, y);
         } else {
@@ -63,6 +70,9 @@ public class Imagem {
 	}
 
     public void desenhaInvertida(int x, int y) {
+        x += Alj.avancado.getCanvas().getStartX();
+        y += Alj.avancado.getCanvas().getStartY();
+        
 		Alj.avancado.getGraphics().drawImage(image, image.getWidth(null) + x, y, x,
 				image.getHeight(null) + y, 0, 0, image.getWidth(null),
 				image.getHeight(null), null);

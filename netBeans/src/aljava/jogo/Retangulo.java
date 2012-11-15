@@ -1,7 +1,7 @@
 package aljava.jogo;
 
 import aljava.Alj;
-import aljava.util.Direction;
+import aljava.util.Direcao;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -84,11 +84,11 @@ public class Retangulo {
      *
      * O cálculo é feito a partir do ponto central deste retangulo, em relacao aos pontos de cada lado.
      * @param outroRetangulo
-     * @return Direction
+     * @return Direcao
      */
-    public Direction pegaLadoMaisProximo(Retangulo outroRetangulo){
+    public Direcao pegaLadoMaisProximo(Retangulo outroRetangulo){
 
-        Direction maior = Direction.ESQUERDA;
+        Direcao menor = Direcao.ESQUERDA;
         int distanciaMenor = (int)pegaPontoCentral().distance( outroRetangulo.pegaPontoEsquerda());
 
         int distanciaDireita = (int)pegaPontoCentral().distance( outroRetangulo.pegaPontoDireita());
@@ -96,21 +96,29 @@ public class Retangulo {
         int distanciaBaixo = (int)pegaPontoCentral().distance( outroRetangulo.pegaPontoBaixo());
 
         if(distanciaDireita < distanciaMenor){
-            maior = Direction.DIREITA;
+            menor = Direcao.DIREITA;
             distanciaMenor = distanciaDireita;
         }
 
         if(distanciaCima < distanciaMenor){
-            maior = Direction.CIMA;
+            menor = Direcao.CIMA;
             distanciaMenor = distanciaCima;
         }
 
-        if(distanciaBaixo < distanciaBaixo){
-            maior = Direction.BAIXO;
+        if(distanciaBaixo < distanciaMenor){
+            menor = Direcao.BAIXO;
             distanciaMenor = distanciaBaixo;
         }
 
-        return maior;
+        return menor;
+    }
+
+    public Point pegaPontoMin(){
+        return new Point(x, y);
+    }
+
+    public Point pegaPontoMax(){
+        return new Point(x+largura, y+altura);
     }
 
     public Point pegaPontoCentral(){
@@ -140,7 +148,7 @@ public class Retangulo {
      */
     public void desenha(){
         Alj.cor.nome("laranja");
-        Alj.desenha.retangulo(x, y, largura, altura);
+        Alj.desenha.retanguloBorda(x, y, largura, altura);
         Alj.cor.nome("vermelho");
         
         Point p = pegaPontoCentral();

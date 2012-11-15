@@ -3,9 +3,7 @@ package aljava;
 import aljava.saida.Tela;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Polygon;
-import java.awt.image.BufferedImage;
 
 
 /**
@@ -32,7 +30,17 @@ import java.awt.image.BufferedImage;
  */
 public class Alj
 {
-    private static Aljava alj = new Aljava(400, 400);       
+    private static Aljava alj;
+
+    public static void inicializa(int largura, int altura){
+        if(alj != null){
+          alj.getCanvas().setVisible(false);
+        }
+        
+        alj = new Aljava(largura, altura);
+        //Pausa para carregar a interface gráfica.
+        Alj.util.espera(500);
+    }
 
     /**
      * Pacote responsável por transformações gerais no desenho como aplicação de escala e rotação.
@@ -40,11 +48,11 @@ public class Alj
     public static class transforma {
       
       public static void rotaciona(int angulo, int xCentral, int yCentral){
-        alj.rotaciona(angulo, xCentral, yCentral);
+        Alj.avancado.getInstance().rotaciona(angulo, xCentral, yCentral);
       }
 
       public static void limpaRotacao(){
-        alj.rotaciona(0, 0, 0);
+        Alj.avancado.getInstance().rotaciona(0, 0, 0);
       }
       
     }
@@ -53,11 +61,11 @@ public class Alj
     public static class cor {
       
       public static void rgb(int r, int g, int b){   
-        alj.corRGB(r,g,b);
+        Alj.avancado.getInstance().corRGB(r,g,b);
       }
       
       public static void nome(String cor){   
-        alj.cor(cor);
+        Alj.avancado.getInstance().cor(cor);
       }
       
       public static void hexadecimal(String hexadecimal){
@@ -65,15 +73,15 @@ public class Alj
             Integer.valueOf( hexadecimal.substring( 1, 3 ), 16 ),
             Integer.valueOf( hexadecimal.substring( 3, 5 ), 16 ),
             Integer.valueOf( hexadecimal.substring( 5, 7 ), 16 ) );
-        alj.corObject(cor);
+        Alj.avancado.getInstance().corObject(cor);
       }
       
       public static void objeto(Color cor){
-        alj.corObject(cor);
+        Alj.avancado.getInstance().corObject(cor);
       }
       
       public static void transparencia(int porcentagem){
-        alj.corTransparencia(porcentagem);
+        Alj.avancado.getInstance().corTransparencia(porcentagem);
       }
       
     }
@@ -84,41 +92,45 @@ public class Alj
     public static class desenha {   
       
       public static void linha(int xInicial, int yInicial, int xFinal, int yFinal){   
-        alj.desenhaLinha(xInicial, yInicial, xFinal, yFinal);
+        Alj.avancado.getInstance().desenhaLinha(xInicial, yInicial, xFinal, yFinal);
       }
       
       public static void retangulo(int x, int y, int largura, int altura){   
-        alj.desenhaRetangulo(x, y, largura, altura);
+        Alj.avancado.getInstance().desenhaRetangulo(x, y, largura, altura);
+      }
+
+      public static void retanguloBorda(int x, int y, int largura, int altura){
+        Alj.avancado.getInstance().desenhaRetanguloBorda(x, y, largura, altura);
       }
       
       public static void triangulo(int x, int y, int largura, int altura){   
-        alj.desenhaTriangulo(x, y, largura, altura);
+        Alj.avancado.getInstance().desenhaTriangulo(x, y, largura, altura);
       }
       
       public static void oval(int x, int y, int largura, int altura){   
-        alj.desenhaCirculo(x, y, largura, altura);
+        Alj.avancado.getInstance().desenhaCirculo(x, y, largura, altura);
       }
       
       public static void poligono(Polygon p){   
-        alj.desenhaPoligono(p);
+        Alj.avancado.getInstance().desenhaPoligono(p);
       }
       
       public static void poligono(int x[], int y[]){   
         Polygon p = new Polygon(x, y, x.length);
-        alj.desenhaPoligono(p);
+        Alj.avancado.getInstance().desenhaPoligono(p);
       }
       
       public static void texto(int x, int y, String texto){
         int fonte = 12;
-        alj.desenhaTexto(x, y, texto, fonte);
+        Alj.avancado.getInstance().desenhaTexto(x, y, texto, fonte);
       }
       
       public static void texto(int x, int y, String texto, int tamanhoFonte){        
-        alj.desenhaTexto(x, y, texto, tamanhoFonte);
+        Alj.avancado.getInstance().desenhaTexto(x, y, texto, tamanhoFonte);
       }      
       
       public static void imagem(int x, int y, String imgFileName){
-        alj.desenhaImagem(x, y, imgFileName);
+        Alj.avancado.getInstance().desenhaImagem(x, y, imgFileName);
       }
     
     }
@@ -127,35 +139,43 @@ public class Alj
     public static class tela {
       
       public static void exibe(){
-        alj.mostraTela();
+        Alj.avancado.getInstance().mostraTela();
       }
 
       public static void limpa(){
-        alj.limpaTela();
+        Alj.avancado.getInstance().limpaTela();
       } 
       
       public static void tamanho(int largura, int altura){
-        alj.alteraTamanho(largura, altura);
+        Alj.tela.exibeMensagem("O método tela.tamanho foi depreciado. Para redimensionar a janela use Alj.inicializa(int largura, int altura)");
+      }
+
+      public static int pegaAltura(){
+          return Alj.avancado.getCanvas().getAltura();
+      }
+
+      public static int pegaLargura(){
+          return Alj.avancado.getCanvas().getLargura();
       }
 
       public static void finaliza(){
-        alj.finaliza();
+        Alj.avancado.getInstance().finaliza();
       }
 
       public static void exibeMensagem(String msg){
-        alj.exibeMensagem(msg);
+        Alj.avancado.getInstance().exibeMensagem(msg);
       }
 
       public static String solicitaTexto(String msg){
-        return alj.solicitaTexto(msg);
+        return Alj.avancado.getInstance().solicitaTexto(msg);
       }
 
       public static int solicitaNumero(String msg){
-        return alj.solicitaNumero(msg);
+        return Alj.avancado.getInstance().solicitaNumero(msg);
       }
       
       public static double solicitaNumeroDouble(String msg){
-        return alj.solicitaNumeroDouble(msg);
+        return Alj.avancado.getInstance().solicitaNumeroDouble(msg);
       }
 
       
@@ -164,26 +184,34 @@ public class Alj
     public static class util {
       
       public static void espera(int milisegundos){
-        alj.espera(milisegundos);
+        Alj.avancado.getInstance().espera(milisegundos);
       }
       
       public static int sorteia(int min, int max){
-        return alj.sorteiaNumero(min, max);
+        return Alj.avancado.getInstance().sorteiaNumero(min, max);
       }
       
       public static double sorteia(double min, double max){
-        return alj.sorteiaNumero(min, max);
+        return Alj.avancado.getInstance().sorteiaNumero(min, max);
       }
     }
 
     public static class avancado {
 
       public static Graphics2D getGraphics(){
-        return alj.getCanvas().getGraphics();
+        return Alj.avancado.getInstance().getCanvas().getGraphics();
       }
 
       public static Tela getCanvas(){
-        return alj.getCanvas();
+        return Alj.avancado.getInstance().getCanvas();
+      }
+
+      public static Aljava getInstance(){
+        if(alj == null) {
+            Alj.inicializa(400, 400);
+        }
+
+        return alj;
       }
 
     }
@@ -192,23 +220,23 @@ public class Alj
     public static class mouse {
       
       public static int x(){
-        return alj.mousePegaPosicaoClickX();
+        return Alj.avancado.getInstance().mousePegaPosicaoClickX();
       }
       
       public static int y(){
-        return alj.mousePegaPosicaoClickY();
+        return Alj.avancado.getInstance().mousePegaPosicaoClickY();
       }
       
       public static boolean clickE(){
-        return alj.mouseBotaoEsquerdoEstaPressionado();
+        return Alj.avancado.getInstance().mouseBotaoEsquerdoEstaPressionado();
       }
 
       public static boolean clickM(){
-        return alj.mouseBotaoMeioEstaPressionado();
+        return Alj.avancado.getInstance().mouseBotaoMeioEstaPressionado();
       }
 
       public static boolean clickD(){
-        return alj.mouseBotaoDireitoEstaPressionado();
+        return Alj.avancado.getInstance().mouseBotaoDireitoEstaPressionado();
       }
       
     }
@@ -221,7 +249,7 @@ public class Alj
          "w", "a", "s", "d", "z", "x", "p"
        */
       public static boolean press(String tecla){
-        return alj.teclaEstaPressionada(tecla);
+        return Alj.avancado.getInstance().teclaEstaPressionada(tecla);
       }
 
       /**
@@ -229,7 +257,7 @@ public class Alj
        * O código é numérico e existem alguns atalhos em KeyEvent.VK_
        */
       public static boolean press(int tecla){      
-        return alj.teclaEstaPressionada(tecla);
+        return Alj.avancado.getInstance().teclaEstaPressionada(tecla);
       }
     
     }

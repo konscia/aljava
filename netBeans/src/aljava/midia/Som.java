@@ -41,7 +41,6 @@ public class Som {
    public void toca() {
      if (clip.isRunning())
         clip.stop();   // Stop the player if it is still running
-     clip.setFramePosition(0); // rewind to the beginning
      clip.start();     // Start playing
    }
 
@@ -55,6 +54,9 @@ public class Som {
    public void pausa() {
      if (clip.isRunning())
         clip.stop();   // Stop the player if it is still running
-     clip.setFramePosition(0); // rewind to the beginning
+   }
+
+   public void reinicia(){
+       clip.setFramePosition(0);
    }
 }

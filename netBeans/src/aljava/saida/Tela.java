@@ -44,6 +44,7 @@ public class Tela extends JFrame
       this.largura = largura;
       this.altura = altura;
       setSize(this.largura+defaultScreenWidth, this.altura+defaultScreenHeight);
+      dispose();
     }
 
     public int getLargura(){

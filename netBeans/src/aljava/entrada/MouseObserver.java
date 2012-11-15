@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 /**
  * Classe responsável por gerenciar questões do mouse.
  */
-package class MouseObserver implements MouseMotionListener, MouseListener
+class MouseObserver implements MouseMotionListener, MouseListener
 {
     private Point mousePos;
     private boolean leftButtonPressed;

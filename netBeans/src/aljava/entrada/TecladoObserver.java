@@ -3,12 +3,11 @@ package aljava.entrada;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Classe responsável por gerenciar questões relacionadas ao Teclado
  */
-package class TecladoObserver implements KeyListener
+class TecladoObserver implements KeyListener
 {
    // private HashMap<Integer, Integer> teclasPressionadas;
     private ArrayList<Integer> teclasPressionadas;
