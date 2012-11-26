@@ -373,6 +373,7 @@ Alternativamente, você pode usar o código da tecla com as constantes da classe
 if( Alj.tecla.press( KeyEvent.VK_TAB ) ){
 	executaEspecial();
 }
+
 ```
 
 ### Utilitários
@@ -451,25 +452,239 @@ while(true){
         int xMouse = Alj.mouse.x();
         int yMouse = Alj.mouse.y();
 
+		//Sempre desenha um pequeno círculo na posição do mouse
         Alj.desenha.oval(xMouse - 1, yMouse - 1, 2, 2);
 
+		//Se o botão esquerdo estiver pressionado,
+        //desenha um círculo vermelho maior
         if (Alj.mouse.clickE()) {
             Alj.cor.rgb(255, 0, 0);
             Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
         }
 
+		//Se o botão do meio estiver pressionado
+        //desenha um círculo verde maior
         if (Alj.mouse.clickM()) {
             Alj.cor.rgb(0, 255, 0);
             Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
         }
 
+		//Se o botão do direito estiver pressionado
+        //desenha um círculo azul maior
         if (Alj.mouse.clickD()) {
             Alj.cor.rgb(0, 0, 255);
             Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
         }
       
         Alj.tela.exibe();   
-    }  
+}  
+```
+
+### Teclado e Tela
+
+```java
+Alj.tela.exibeMensagem("Olá. Pressione Enter para mudar a largura e altura da janela.");
+//Inicializa uma janela com a largura e altura padrão    
+int largura = 740;
+int altura = 180;
+String textoQualquer = "Aqui vai um texto que você informar";  
+Alj.inicializa(largura, altura);
+//Entra no loop para esperar o usuário pressionar enter
+while(true){            
+      Alj.tela.limpa();  
+      //Quando o enter for pressionado, pega uma nova largura, uma nova altura e o texto a ser exibido
+      if(Alj.tecla.press("enter")){
+        largura = Alj.tela.solicitaNumero("Informe a largura:");
+        altura = Alj.tela.solicitaNumero("Informe a altura:");
+        textoQualquer = Alj.tela.solicitaTexto("Ïnforme um texto qualquer:");
+        //e re-inicializa a janela com a altura especificada
+        Alj.inicializa(largura, altura);
+      }
+      
+	  //Desenha a largura e a altura da janela
+      String tamanhoTela = largura+" x "+altura;
+      Alj.desenha.texto(20, 60, tamanhoTela, 40);
+      //Desenha o texto informado
+      Alj.desenha.texto(20, 100, textoQualquer, 40);
+
+      //Exibe
+      Alj.tela.exibe();
+      Alj.util.espera(50);
+    } 
+```
+
+## Mídia
+
+Por hora, podem ser usadas mídias para imagens e sons. Cada arquivo de mídia é representado por um objeto de uma classe. Todos os arquivos utilizados devem estar na pasta raiz do projeto.
+
+### Imagem
+
+Uma imagem representa um arquivo que pode estar nos formatos "png", "jpg" ou "gif". 
+Uma imagem possui métodos para desenhá-la, alterar largura, altura ou invertê-la. 
+
+```java
+Imagem img;
+//...
+img = new Imagem("pasta/nomeimagem.jpg");
+
+//Método para desenhar a imagem em uma posição na tela
+//img.desenha(int x, int y);
+img.desenha(20, 20); 
+
+//Métodos de acesso à largura e altura da imagem
+int largura = img.pegaLargura();
+int altura = img.pegaAltura();
+
+//Métodos que modificam a largura e altura
+img.alteraLargura( 1 ); //Aumenta em 1 pixel a largura da imagem
+img.alteraAltura( -1 ); //Diminui em um pixel a altura da imagem
+
+//img.alteraTamanho(int novaLargura, int nova Altura)
+img.alteraTamanho(48, 48); //Redimensiona a imagem para os valores especificados
+
+//Inverte a imagem
+img.inverte();
+```
+
+### Gif
+
+Um objeto da classe Gif é uma extensão da classe Imagem e tem como única finalidade permitir que um objeto Gif pare de ser desenhado após certo período de tempo. Este recurso é útil por exemplo, em Gif's de explosões que devem parar de ser exibidos após alguns milissegundos.
+
+```java
+//new Gif(String caminhoImagem, int tempoParaSumirEmMilissegundos);
+Gif explosao = new Gif("explosao.gif", 2000);
+
+//Além dos métodos de imagem, há um método disponível para saber se o tempo já terminou
+if( explosao.temrinou() ){
+   //faz alguma coisa..
+}
+
+//Outro método útil é o reinicia, que permite reiniciar o contador de tempo do Gif
+explosao.reinicia();
+```
+
+### Animação
+
+Uma animação corresponde a um conjunto de imagens, cada qual representando um quadro, sendo exibidas uma após a outra com um certo intervalo de tempo. Por ser uma coleção de imagens, estão disponíveis alguns métodos que alteram todas as imagens da animação.
+
+```java
+//Cria um objeto da classe Animação informando o tempo em milissegundos de intervalo entre as imagens
+ Animacao animacao = new Animacao(200);
+ //Adiciona diferentes imagens para a animação
+ animacao.addImagem("imagens/ryu/chute.png");
+ animacao.addImagem("imagens/ryu/chute2.png");
+ animacao.addImagem("imagens/ryu/chute.png");
+ animacao.addImagem("imagens/ryu/soco_direita.png");
+ animacao.addImagem("imagens/ryu/soco_esquerda.png");
+ animacao.addImagem("imagens/ryu/haduken.png");
+ //Inicia execução da animação em loop, ou seja, quando chegar ao final, recomeça
+ //Uma forma alternativa é usar o método inicia() apenas.
+ animacao.iniciaEmLoop();
+    
+ //Para demonstrar os demais recursos fazemos um loop que altera a animação conforme as teclas digitadas pelo usuário   
+ while(true){ 
+      Alj.tela.limpa();
+
+      if( Alj.tecla.press("esquerda") ){
+        //Diminui em 10 pixels a largura de todas as imagens da animação
+        animacao.alteraLargura(-10);
+      }
+
+      if( Alj.tecla.press("direita") ){
+        //Aumenta em 10 pixels a largura de todas as imagens da animação
+        animacao.alteraLargura(10);
+      }
+
+      if( Alj.tecla.press("cima") ){
+      	//Aumenta em 10 pixels a altura de todas as imagens da animação
+        animacao.alteraAltura(10);
+      }
+            
+      if( Alj.tecla.press("baixo") ){
+      	//Diminui em 10 pixels a altura de todas as imagens da animação
+        animacao.alteraAltura(-10);
+      }
+
+      if( Alj.tecla.press("espaco") ){
+      	//Inverte todas as imagens da animação
+        animacao.inverte();
+      }
+      //Processa a animação para realizar a troca do quadro
+      animacao.processa();
+      //Desenha a imagem atual da animação no ponto 50, 50 da tela
+      animacao.desenha(50, 50);
+
+      Alj.tela.exibe();
+    }
+```
+
+
+### Sons
+
+Um som pode ser executado, parado, reiniciado e executado em loop. Somente estão disponíveis sons no formato Wav. Segue abaixo exemplo de como controlar uma música via comandos do teclado.
+
+```java
+//Cria objeto que representa uma música
+Som musica = new Som("recursos/aljava.exemplos.som/mario.wav");
+while(true){
+	Alj.tela.limpa();
+    
+	Alj.desenha.texto(20, 20, "Pressione t -> Toca a Musica");
+	if(Alj.tecla.press("t")){
+	   musica.toca();
+       //se preferir, inicie em loop
+       //musica.loop();
+	}
+
+	Alj.desenha.texto(20, 40, "Pressione p -> Pausa a Musica");
+	if(Alj.tecla.press("p")) {
+		musica.pausa();
+	}
+
+	Alj.desenha.texto(20, 60, "Pressione r -> Reinicia a Musica");
+	if(Alj.tecla.press("r")) {
+		musica.reinicia();
+	}
+
+	Alj.tela.exibe();
+}
+```
+Outro uso é como sons de notas musicais para simular um violão ou guitarra por exemplo.
+Neste exemplo, para cada tecla digitada um objeto som é criado e executado, assim, uma mesma tecla pode ser pressionada várias vezes para criar diversos objetos do mesmo som.
+
+Variáveis booleanas são utilizadas para garantir que a tecla só pode ser pressionada novamente após ser solta.
+
+```java
+         while(true){
+            Alj.tela.limpa();
+
+            //Tecla Ré
+            Alj.desenha.texto(20, 40, "Pressione s -> Ré");
+            if(Alj.tecla.press("s") && sLiberado){
+                sLiberado = false;
+                Som som = new Som("recursos/aljava.exemplos.som/re_piano.wav");
+                som.toca();
+            }
+
+            if(!Alj.tecla.press("s")) {
+                sLiberado = true;
+            }
+
+            //Tecla Ré
+            Alj.desenha.texto(20, 60, "Pressione d -> Fá");
+            if(Alj.tecla.press("d") && dLiberado){
+                dLiberado = false;
+                Som som = new Som("recursos/aljava.exemplos.som/fa_piano.wav");
+                som.toca();
+            }
+
+            if(!Alj.tecla.press("d")) {
+                dLiberado = true;
+            }
+
+           
+            Alj.tela.exibe();
+        }
 ```
 
 
