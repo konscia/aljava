@@ -150,14 +150,31 @@ pol.addPoint(100, 100);
 Alj.desenha.poligono(pol);
 ```
 
+#### Textos
+
+Textos podem ser desenhados em qualquer posição X, Y da tela. Alternativamente, você pode informar um quarto parâmetro para o tamanho da fonte. Não é possível mudar a fonte dos textos e a quebra de linha também não é feita pelo método.
+
+```java
+//Assinatura do método 
+Alj.desenha.texto(int x, int y, String texto);
+//ou
+Alj.desenha.texto(int x, int y, String texto, int tamanhoFonte);
+
+Alj.desenha.texto(20, 200, "Aljava - Programação que vale o esforço.", 16);
+```
+
 ### cor
 
-Todos os desenhos acima podem receber transparência ou uma cor(exceto imagens). Você pode mudar a cor de diversas formas, escolha a que preferir.
+Todos os desenhos acima podem receber transparência ou uma cor. Você pode mudar a cor de diversas formas, escolha a que preferir.
 
 #### Mudar cor pelo nome
 Existem alguns nomes de cores pré-definidos que podem ser usados como uma String. Isso é útil no início do aprendizado de programação, principalmente para os primeiros exercícios.
 
 ```java
+//Assinatura do método
+Alj.cor.nome(String nomeCor);
+
+//Usando a cor vermelha
 Alj.cor.nome("vermelho");
 ```
 
@@ -167,15 +184,20 @@ As cores disponíveis são: "vermelho", "laranja", "ciano", "preto", "azul", "am
 Uma cor é formada por uma quantidade de vermelho (R), verde (G) e azul (B). Estes valores variam de 0 (mais escuro) até 255 (mais claro). Este comando tem três parâmetros, um para cada das três cores e é o mais útil para criar pequenas animações com cores.
 
 ```java
-//Alj.cor.rgb(int r, int g, int b)
-Alj.cor.rgb(200, 100, 78);
+//Assinatura do método
+Alj.cor.rgb(int r, int g, int b)
+
+//Inforando uma cor com alta quantidade de vermelho
+Alj.cor.rgb(200, 100, 10);
 ```
 #### Hexadecimal #006699
-Desenvolvedores que tenham conhecimento de web e estejam acostumados com o formato hexadecimal, podem usá-lo também.
-Qualquer cor hexadecimal pode ser informada como uma String.
+Desenvolvedores que tenham conhecimento de web e estejam acostumados com o formato hexadecimal, podem usá-lo também. Qualquer cor hexadecimal pode ser informada como uma String.
 
 ```java
-//Alj.cor.hexadecimal(String hexadecimal);
+//Assinatura do método
+Alj.cor.hexadecimal(String hexadecimal);
+
+//Exemplo de uma cor tendendo para o verde
 Alj.cor.hexadecimal("#336699");
 ```
 
@@ -183,15 +205,61 @@ Alj.cor.hexadecimal("#336699");
 Desenvolvedores mais avançados podem usar um objeto da classe Color do Java.
 
 ```java
+//Assinatura do método
+Alj.cor.objeto(Color cor);
+
+//Exemplo da mesma cor informada pelo formato RGB
 Alj.cor.objeto( new Color(200,100,10) );
 ```
 
 #### Alterar a transparência
-Outro recurso útil é o uso de transparências. Você pode informat a transparência com uma porcentagem que varia de 0 até 100. Quanto maior o valor, maior a transparência.
+Outro recurso útil é o uso de transparências. Você pode informar a transparência com uma porcentagem que varia de 0 até 100. Quanto maior o valor, maior a transparência.
 
 ```java
-//Alj.cor.transparencia(int porcentagem);
+//Assinatura do método
+Alj.cor.transparencia(int porcentagem);
+
+//Exemplo de 50% de transparência
 Alj.cor.transparencia(50);
+```
+
+### Exemplo completo Cores + Transparência + Formas Geométricas
+
+```java
+	//Cria uma variável para o valor da trasnparência. 
+    //Inicialmente os desenhos começarão transparentes
+    int transparencia = 100;
+    
+    //Inicia loop que irá desenhar as formas geométricas uma vez para cda valor inteiro entre 100 e 0.
+    while(transparencia > 0){
+      transparencia -= 1;
+
+      //Limpa telae e configura cor laranja
+      Alj.tela.limpa();
+      Alj.cor.rgb(255, 200, 100);
+
+      //Desenha um texto informando o valor da transparência com uma linha abaixo para dar um estilo visual agradável. Este texto deve estar sempre exibido, portanto, sua transparência é 0
+      Alj.cor.transparencia(0);
+      Alj.desenha.texto(10, 28, "Transparência: "+transparencia, 20);
+      Alj.desenha.linha(10, 42, 290, 42);
+
+      //Desenha as três formas geométricas mais básicas com o valor da transparência conforme a variável "transparência"
+      Alj.cor.transparencia(transparencia);
+      Alj.desenha.retangulo(20, 170, 40, 40);
+      Alj.desenha.oval(200, 60, 40, 40);
+      Alj.desenha.triangulo(100, 120, 40, 40);
+
+	  //Desenha um polígono usando 5 pontos
+      //Coordenadas x e y do polígono, Ex: 100,100 -> 200, 100 -> 300, 200, etc...
+      int xs[] = {100, 200, 300, 150, 100};
+      int ys[] = {100, 100, 200, 150, 100};
+      Alj.desenha.poligono(xs, ys);
+      
+      //Exibe os desenhos
+      Alj.tela.exibe(); 
+      //Faz uma pausa para demosntrar o efeito da animação
+      Alj.util.espera(50);
+    }       
 ```
 
 ### transforma (Rotação)
