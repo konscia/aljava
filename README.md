@@ -163,7 +163,7 @@ Alj.desenha.texto(int x, int y, String texto, int tamanhoFonte);
 Alj.desenha.texto(20, 200, "Aljava - Programação que vale o esforço.", 16);
 ```
 
-### cor
+### Cores
 
 Todos os desenhos acima podem receber transparência ou uma cor. Você pode mudar a cor de diversas formas, escolha a que preferir.
 
@@ -190,6 +190,7 @@ Alj.cor.rgb(int r, int g, int b)
 //Inforando uma cor com alta quantidade de vermelho
 Alj.cor.rgb(200, 100, 10);
 ```
+
 #### Hexadecimal #006699
 Desenvolvedores que tenham conhecimento de web e estejam acostumados com o formato hexadecimal, podem usá-lo também. Qualquer cor hexadecimal pode ser informada como uma String.
 
@@ -223,7 +224,188 @@ Alj.cor.transparencia(int porcentagem);
 Alj.cor.transparencia(50);
 ```
 
-### Exemplo completo Cores + Transparência + Formas Geométricas
+### Transformação
+
+O objetivo deste grupo de comandos e poder realizar transformações como escala e rotação nos desenhos, por hora, somente rotação está disponível.
+
+#### Rotação
+A rotação é sempre aplicada diretamente ao ambiente de desenho. Desse modo, é sempre importante informar qual o eixo x, y que será utilizado para a rotação.
+
+```java
+//Assinatura do método
+Alj.transforma.rotaciona(int angulo, int xCentra, int yCentral);
+```
+
+Se você quiser uma determinada forma geométrica seja rotacionada, precisará rotacionar a tela usando como eixo o centro da figura, e, após o desenho, limpar a rotação para que ela não afete os próximos desenhos.
+
+Exemplo de um losango (Quadrado rotacionado em 90 graus).
+
+```java
+//Define x e y da posição central da rotação
+int xCentral = x + (largura / 2);
+int yCentral = y + (altura / 2);
+
+//Executa Rotação
+Alj.transforma.rotaciona(90, xCentral, yCentral);
+//Faz o desenho
+Alj.desenha.retangulo(x, y, largura, altura);
+//Limpa a rotação para que os próximos desenhos não sejam afetados.
+Alj.transforma.limpaRotacao();
+```
+
+### Tela
+A Aljava é sempre baseada em uma tela. Os comandos deste pacote ajudam a trabalhar com ela e com entrada de dados que devem vir do usuário através de janelas pop-up.
+
+#### Exibir a Tela
+Todos os desenhos só serão exibidos na tela após a execução deste método. Antes disso, ficam em um buffer de desenho escondido. Isso evita que a tela fique "piscando".
+
+```java
+//Lembre-se de sempre executar este método após desenhar qualquer coisa (que você queira ver na tela).
+Alj.tela.exibe();
+```
+
+#### Limpar
+Antes de iniciar o desenho de um novo frame da sua aplicação, você pode querer limpar a tela. Basicamente limpar a tela é desenhar um retângulo branco por cima de tudo. Este método é um atalho para isso.
+
+```java
+Alj.tela.limpar();
+```
+
+#### Alterar o tamanho
+A tela tem por padrão 400 pixels de largura por 400 de altura. Para alterar este tamanho, use:
+
+```java
+//Alj.inicializa(int largura, int altura)
+Alj.inicializa(800, 600);
+```
+
+__OBS__: Este método não usa o grupo "tela" na assinatura pois a intenção é no futuro transformá-lo em um inicializador da janela.  
+
+#### Finalizar
+Para encerrar o programa e fechar a janela, execute:
+
+```java
+Alj.tela.finalizar();
+```
+
+#### Exibir Mensagem
+Frequentemente é útil exibir mensagens ao usuário como "Parabéns, você venceu.". Para isto, use:
+
+```java
+Alj.tela.exibeMensagem("Parabéns, você venceu.\n\nTente novamente.")
+```
+
+**Obs:** use \n para quebra de linha na janela.
+
+#### Solicitar Texto ao usuário
+Você também pode solicitar que o usuário lhe informe um texto qualquer, como por exemplo, o seu nome.
+
+```java
+String nome = Alj.tela.solicitaTexto("Por favor, informe seu nome.");
+```
+
+#### Solicitar Números ao usuário
+Você também pode solicitar que o usuário lhe informe um número qualquer, como por exemplo, para um par ou ímpar.
+
+```java
+int numero = Alj.tela.solicitaNumero("1, 2, 3 e já...");
+```
+
+Alternativamente, você pode solicitar um double
+
+```java
+double numero = Alj.tela.solicitaNumeroDouble("Informe o preço do produto:");
+```
+
+### Mouse
+
+O mouse é um dos recursos que possibilitam maior interação com o usuário.
+Sempre que necessário você pode pegar a posicão x, y do mouse com os métodos:
+
+```java
+int x = Alj.mouse.x();
+int y = Alj.mouse.y();
+```
+
+E pode ver também se um dos três botões do mouse foram pressionados
+
+```java
+if( Alj.mouse.clickE() ){
+    Alj.tela.exibeMensagem("Você pressionou o botão esquerdo");
+}
+
+if( Alj.mouse.clickM() ){
+	Alj.tela.exibeMensagem("Você pressionou o botão do meio");
+}
+
+if( Alj.mouse.clickD() ){
+	Alj.tela.exibeMensagem("Você pressionou o botão direito");
+}
+```
+
+### Teclado
+
+Por enquanto a Aljava só permite saber se em um dado momento, uma tecla está ou não pressionada.
+
+```java
+if( Alj.tecla.press("esquerda") ){
+	moveHorizontal(-10);
+}
+	
+if( Alj.tecla.press("direita") ){
+	moveHorizontal(+10);
+}
+
+if( Alj.tecla.press("cima") ){
+	moveVertical(-10);
+}
+	
+if( Alj.tecla.press("baixo") ){
+	moveVertical(+10);
+}
+```
+
+As teclas disponíveis com String são: "enter", "espaco", "esquerda", "direita", "cima","baixo", todas as letras de "a" até "z", todos os números de 0 até 9 e todos os números do "NUMPAD" através das Strings "NUMPAD0", "NUMPAD2", etc.
+
+Alternativamente, você pode usar o código da tecla com as constantes da classe KeyEvent do Java.
+
+```java
+if( Alj.tecla.press( KeyEvent.VK_TAB ) ){
+	executaEspecial();
+}
+```
+
+### Utilitários
+
+Neste grupo estão alguns comandos utilitários que não se encaixam em nenhum dos grupos anteriores.
+
+#### Espera
+
+Em jogos, é muito comum precisarmos pedir para o computador esperar alguns instantes antes de executar uma ação ou partir para o frame seguinte do jogo. Podemos fazer isso, esperando alguns milisegundos com:
+
+```java
+Alj.util.espera(500);
+```
+
+#### Números aleatórios
+
+Você pode sortear um número entre um mínimo e um máximo. 
+
+```java
+int num = Alj.util.sorteia(1, 10);
+```
+
+Alternativamente, você pode sortear um double passando valores double como parâmetros
+
+```java
+double num = Alj.util.sorteia(1.5, 3.5);
+```
+
+## Exemplos Completos Parte 1
+
+Encerramos o detalhamento dos comandos com os utilitários. Agora, seguem alguns exemplos utilizando comandos de diferentes pacotes. 
+
+### Cores + Desenho
 
 ```java
 	//Cria uma variável para o valor da trasnparência. 
@@ -262,202 +444,34 @@ Alj.cor.transparencia(50);
     }       
 ```
 
-### transforma (Rotação)
-A rotação é sempre aplicada diretamente ao ambiente de desenho. Desse modo, é sempre importante informar qual o eixo x, y que será utilizado para a rotação.
-
-Se você quiser uma determinada forma geométrica rotacionada, precisará rotacionar a tela usando como eixo o centro da figura, e, após o desenho, limpar a rotação para que ela não afete os próximos desenhos.
-
-Exemplo de um losango
+### Mini Paint
 
 ```java
-int xCentral = x + (largura / 2);
-int yCentral = y + (altura / 2);
+while(true){      
+        int xMouse = Alj.mouse.x();
+        int yMouse = Alj.mouse.y();
 
-Alj.transforma.rotaciona(90, xCentral, yCentral);
-Alj.desenha.retangulo(x, y, largura, altura);
-Alj.transforma.limpaRotacao();
+        Alj.desenha.oval(xMouse - 1, yMouse - 1, 2, 2);
+
+        if (Alj.mouse.clickE()) {
+            Alj.cor.rgb(255, 0, 0);
+            Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
+        }
+
+        if (Alj.mouse.clickM()) {
+            Alj.cor.rgb(0, 255, 0);
+            Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
+        }
+
+        if (Alj.mouse.clickD()) {
+            Alj.cor.rgb(0, 0, 255);
+            Alj.desenha.oval(xMouse - 10, yMouse - 10, 20, 20);
+        }
+      
+        Alj.tela.exibe();   
+    }  
 ```
 
-### tela
-A Aljava é sempre baseada em uma tela. Os comandos deste pacote ajudam a trabalhar com ela e com entrada de dados que devem vir do usuário através de janelas pop-up.
-
-#### Exibir a Tela
-Todos os desenhos só serão exibidos na tela após a execução deste método. Antes disso, ficam em um buffer de desenho escondido. Isso evita que a tela fique "piscando".
-
-```java
-//Lembre-se de semrpe executar este método após desenhar qualquer coisa (que você queira ver na tela).
-Alj.tela.exibe();
-```
-
-#### Limpar
-Antes de iniciar o desenho de um novo frame da sua aplicação, você pode querer limpar a tela.
-Basicamente limpar a tela é desenhar um retângulo branco por cima de tudo. Este método é um atalho para isso.
-
-```java
-Alj.tela.limpar();
-```
-
-#### Alterar o tamanho
-A tela tem por padrão 400 pixels de largura por 400 de altura. Para alterar este tamanho, use:
-
-```java
-//Alj.tela.tamanho(int largura, int altura)
-Alj.tela.tamanho(800, 600);
-```
-
-#### Finalizar
-Para encerrar o programa e fechar a janela, execute:
-
-```java
-Alj.tela.finalizar();
-```
-
-#### Exibir Mensagem
-Frequentemente é útil exibir mensagens ao usuário como "Parabéns, você venceu.". Para isto, use:
-
-```java
-Alj.tela.exibeMensagem("Parabéns, você venceu.\n\nTente novamente.")
-```
-
-**Obs:** use \n para quebra de linha na janela.
-
-#### Solicitar Texto ao usuário
-Você também pode solicitar que o usuário lhe informe um texto qualquer, como por exemplo, o seu nome.
-
-```java
-String nome = Alj.tela.solicitaTexto("Por favor, informe seu nome.");
-```
-
-#### Solicitar Números ao usuário
-Você também pode solicitar que o usuário lhe informe um número qualquer, como por exemplo, para um par ou ímpar.
-
-```java
-int numero = Alj.tela.solicitaNumero("1, 2, 3 e já...");
-```
-
-Alternativamente, você pode solicitar um double
-
-```java
-double numero = Alj.tela.solicitaNumeroDouble("Informe o preço do produto:");
-```
-
-### som
-
-Basicamente para trabalhar com sons é nessário tocá-los, pausá-los e repetí-los. É isso que estes comandos fazem.
-Outro ponto importante é que os sons precisam ser carregados previamente e esse processo pode demorar alguns segundos.
-
-É uma boa prática desenhar uma mensagem ou imagem informando que o som está sendo carregado, e só depois, mudar para a imagem do jogo.
-
-Os sons devem estar sempre na pasta raiz da aplicação, exatamente igual as imagens.
-
-**Obs**: a lib só aceita sons no formato WAV.
-
-#### Carregando sons
-
-Quando carrega um som para a memória você deve informar uma chave para esse som. Será por essa chave que você poderá acessá-lo para tocá-lo ou pausá-lo. O segundo parâmetro é o nome do arquivo de som.
-
-```java
-Alj.som.carrega("golpe", "sounds/golpe.wav");
-Alj.som.carrega("golpe2", "sounds/golpe2.wav");
-```
-
-#### Executando sons
-
-```java
-Alj.som.toca("golpe");
-```
-
-Opcionalmente, você pode executar um som em loop
-
-```java
-Alj.som.loop("golpe2");
-```
-
-#### Pausando sons
-
-```java
-Alj.som.para("golpe2");
-``` 
-
-### mouse
-
-O mouse é um dos recursos que possibilita maior interação com o usuário.
-Sempre que necessário você pode pegar a posicão x, y do mouse com os métodos:
-
-```java
-int x = Alj.mouse.x();
-int y = Alj.mouse.y();
-```
-
-E pode ver também se um dos dois botões foram pressionados
-
-```java
-if( Alj.mouse.clickE() ){
-    Alj.tela.exibeMensagem("Você pressionou o botão esquerdo");
-}
-
-if( Alj.mouse.clickD() ){
-	Alj.tela.exibeMensagem("Você pressionou o botão direito");
-}
-```
-
-### tecla
-
-Por enquanto a Aljava só permite saber se em um dado momento, uma tecla está ou não pressionada.
-
-```java
-if( Alj.tecla.press("esquerda") ){
-	moveHorizontal(-10);
-}
-	
-if( Alj.tecla.press("direita") ){
-	moveHorizontal(+10);
-}
-
-if( Alj.tecla.press("cima") ){
-	moveVertical(-10);
-}
-	
-if( Alj.tecla.press("baixo") ){
-	moveVertical(+10);
-}
-```
-
-As teclas disponíveis com String são: "enter", "espaco", "esquerda", "direita", "cima","baixo", "w", "a", "s", "d", "z", "x" e "p".
-
-Alternativamente, você pode usar o código da tecla
-
-```java
-if( Alj.tecla.press( KeyEvent.VK_SPACE ) ){
-	lancaEspecial();
-}
-```
-
-### util
-
-Reunião de comandos úteis que não se encaixam em nenhum dos pacotes anteriores.
-
-#### Espera
-
-Em jogos, é muito comum precisarmos pedir para o computador esperar alguns instantes antes de executar uma ação ou partir para o frame seguinte do jogo. Podemos fazer isso, esperando alguns milisegundos com:
-
-```java
-Alj.util.espera(500);
-```
-
-#### Números aleatórios
-
-Você pode sortear um número entre um mínimo e um máximo. 
-
-```java
-int num = Alj.util.sorteia(1, 10);
-```
-
-Alternativamente, você pode sortear um double passando valores double como parâmetros
-
-```java
-double num = Alj.util.sorteia(1.5, 3.5);
-```
 
 ## Conclusão
 
