@@ -874,16 +874,109 @@ Importe as classes desta seção usando **import aljava.jogo.\***.
 
 ### Motor
 
-### MotorSingleton
+A classe motor gera objetos que controlam o fluxo principal do jogo e realizam a troca de fases. 
+
+#### MotorSingleton
+
+Por jogo, é ideal que só exista um objeto da classe motor disponível. Para isso, esta classe implementa o padrão singleton, que garante apenas um único objeto disponível para toda a aplicação. De qualquer local do código o motor do jogo pode ser recuperado através de:
+
+```java
+Motor motor = MotorSingleton.pegaInstancia();
+```
+
+#### Adicionando fases
+Para incluir fases no motor basta usar o método "adicionaFase" informando a chave e o correspondente objeto que implementa a interface Fase.
+
+```java
+		//Cria objetos de classes que implementam a interface Fase
+        TelaInicial t = new TelaInicial( senhorq );
+        Fase1 f = new Fase1( senhorq );
+        Fase2 f2 = new Fase2( senhorq );
+        FaseChefao c = new FaseChefao( senhorq );
+        
+        //Recupera objeto motor
+        Motor motorJogo = MotorSingleton.pegaInstancia();
+        //Adiciona as fases existentes,
+        //todas implementando a interface Fase
+        motorJogo.adicionaFase("telaInicial", t);
+        motorJogo.adicionaFase("fase1", f);
+        motorJogo.adicionaFase("fase2", f2);
+        motorJogo.adicionaFase("faseChefao", c);
+```
+
+#### Execurtando
+Para executar o motor, basta informar a fase inicial e opcionalmente, o número de quadros por segundo.
+
+```java
+motorJogo.defineFaseInicial("telaInicial");
+motorJogo.alteraQuadrosPorSegundo(50);
+motorJogo.executa();
+```
+
+#### Troca de fases
+
+Para trocar de fase, basta executar o seguinte método, informando a chave da próxima fase:
+
+```java
+Motor motorJogo = MotorSingleton.pegaInstancia();
+motorJogo.defineProximaFase("fase2");
+```
 
 ### Interface Fase
 
-### Classe Abstrata ObjetoJogo
+A interface Fase contém três métodos que devem ser implementados: 
+
+1) **processa**: Contém a lógica da fase;
+2) **desenha**: desenha os objetos da fase;
+3) **inicia**: Método executado sempre antes de de fazer o primeiro processamento da fase. Também é executado quando a fase é definida como "próxima".
+
+```java
+public class MinhaFase implements Fase {
+    //...
+    public void inicia(){
+    	//Garate que sempre que voltar para essa fase o jogador iniciará em X = 40
+        jogador.alteraX(40);
+    }
+    
+    public void processa(){
+        jogador.processa();
+        inimigo.processa();
+        
+        processaColisoes();
+        verificaVitoria();
+    }
+    
+    public void desenha(){
+    	jogador.desenha();
+        inimigo.desenha();
+    }
+    //...
+}
+```
+
+### Classe abstrata ObjetoJogo
+
+Esta classe contém dois métodos abstratos, o **processa** para a lógica do objeto e o **desenha**. A classe estende a classe "RetanguloGravidade" e tem métodos para informar e recuperar se um objeto está "vivo" no jogo.
+
+```java
+public class Tiro extends ObjetoJogo {
+    //...
+    public void processa(){
+    	x += 1;
+    }
+    
+    public void desenha(){
+        Alj.cor.nome("preto");
+        Alj.desenha.oval(x, y, largura, altura);
+    }
+    //...
+}
+```
 
 
 ## Conclusão
 
-Ao todo, são 37 comandos. Todos com o mesmo objetivo de tornar a programação em java um pouco mais divertida e prazerosa ara quem está começando.
+Todos os comandos e classes aqui apresnetados tem como mesmo objetivo, tornar a programação em java um pouco mais divertida e prazerosa para quem está começando.
 
 Assim, nossos primeiros programas podem ganhar um pouco mais de vida e dinamismo e o ensino fica melhor também para o professor que pode ir muito além do tradicional.
 
@@ -894,10 +987,14 @@ Espero que gostem.
 
 À criatividade e disposição dos meus alunos que tem encarado comigo o desafio de aprender programação de um modo que vale a pena, divertido, voltado para aproveitar o máximo do potencial criativo que o computador pode nos oferecer.
 
-Ao SENAI são José e à Márcia Cristina (coordenadora) pela confiança e pelo excepcional trabalho como coordenadora do curso técnico de programação articulado com o ensino médio.
+Ao SENAI São José e à Márcia Cristina (coordenadora) pela confiança e pelo excepcional trabalho como coordenadora do curso técnico de programação articulado com o ensino médio.
 
 Aos projetos BlueJ, Greenfoot, idraw e Processing.
 
 Ao orientador do meu TCC, professor Ricardo Pereira e Silva, UFSC e aos demais professores do curso de Sistemas de Informação que contribuíram para o meu aprendizado e desenvolvimento.
 
 Por fim, à minha amada família, Suélen e Kainan, simplesmente pelo que são.!
+
+Linhas apenas,
+para completar,
+1000 linhas no arquivo. até mais.
