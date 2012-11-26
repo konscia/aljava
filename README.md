@@ -402,7 +402,7 @@ Alternativamente, você pode sortear um double passando valores double como par�
 double num = Alj.util.sorteia(1.5, 3.5);
 ```
 
-## Exemplos Completos Parte 1
+## Exemplos Completos
 
 Encerramos o detalhamento dos comandos com os utilitários. Agora, seguem alguns exemplos utilizando comandos de diferentes pacotes. 
 
