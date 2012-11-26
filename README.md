@@ -845,6 +845,7 @@ Por fim, no loop do jogo, o cenário deve ser processado para realizar os cálcu
 ```java
 ...
 cena1.processa();
+cena1.desenha();
 ...
 ```
 
