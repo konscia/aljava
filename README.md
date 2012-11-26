@@ -1,33 +1,33 @@
-Classe Aljava 
+Livro de Receitas Aljava 
 =====
 
-Aljava é um conjunto de comandos que facilitam o desenvolvimento de jogos e Simulações em Java.
-Os Comandos são divididos em 8 pacotes:
+Aljava é um framework Java desenvolvido para o ensino de Orientação a Obejtos tendo como foco o desenvolvimento de jogos.
+O Framework também pode ser usado como uma biblioteca de classes úteis que dentre outras coisas realizam o desenho de formas geométricas, imagens, execução de sons e colisões envolvendo Retângulos.
 
-* **cor**: seleção da cor que está sendo utilizada para o desenho em diversos formatos e uso de transparência;
-* **desenho**: Desenho de formas geométricas e imagens;
-* **transforma**: Que permite o uso de rotações;
-* **tela**: com comandos para solicitar informações ao usuário, tamanho da tela, etc;
-* **som**: Permite o pré-carregamento, execução, pausa e loop de sons WAV;
-* **mouse**: Acesso ao mouse;
-* **tecla**: Acesso ao teclado;
-* **util**: comandos utilitários como o sorteio de números aleatórios e espera.
+O framework pode ser dividido nas seguintes seções
+
+* **Desenho, Tela e Utilitáros**: Métodos usados para desenhar formas geométricas utilizando diversas cores, recursos de transparência e colisão, além de métodos para recuperar textos e números informados pelos usuários. Outros métodos utilitários como um sorteador de números também estão disponíveis; 
+* **Mídia**: Classes para desenho de imagens, animações e execução de sons;
+* **Elementos de Jogo**: Classes para construção de cenários, realização de colisão, tratamento de gravidade;
+* **Framework**: Uso das quatro classes responsáveis por transformar o Aljava em um mini Framework para o desenvolvimento de jogos.
 
 ## Início
 
+Esta seção descreve questões iniciais básicas para o uso do Aljava nos seus projetos.
+
 ### Instalação
 
-Basta adicionar ao seu projeto o arquivo **Aljava.jar** que está na raiz do github. Ele tem tudo que é necessário.
+Basta adicionar ao seu projeto o arquivo **Aljava.jar** que está disponível [aqui](https://github.com/kaleucaminha/aljava/blob/master/Aljava.jar). Ele tem tudo que é necessário.
 
 ### Execução
 
-Para iniciar com a classe Aljava basta importá-la e executar alguns dos seus comandos. Ao importar a classe uma janela de 400x400 é criada para o jogo, todos os comandos são baseados nesta janela.
+Para iniciar com a classe Alj basta importá-la e executar alguns dos seus comandos. Ao importar a classe uma janela de 400x400 é criada para o jogo, todos os comandos são baseados nesta janela.
 
 ```java
 import aljava.Alj;
 ```
 
-**Obs:** Para facilitar a escrita o nome usado para acessar os comandos é Alj.*
+Segue abaixo alguns exemplos de comandos disponíveis na classe Alj.
 
 ```java
 Alj.desenha.retangulo(0, 0, 400, 400);
@@ -38,11 +38,24 @@ Alj.desenha.texto(20, 200, "Aljava - Programação é massa.", 16);
 Alj.tela.exibe();
 ```
 
+**Obs:** Para que um desenho efetivamente seja exibido na tela, o método __Alj.tela.exibe()__ deve ser executado.
+
 ### IDE - Ambiente de Programação
 
-A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a usá-lo livremente. Qualquer ambiente de programação (Netbeans, Eclipse, JCreator, etc) pode ser utilizado. Para fins didáticos, recomendo o BlueJ.
+A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a usá-lo livremente. Qualquer ambiente de programação (Netbeans, Eclipse, JCreator, etc) pode ser utilizado. Para fins didáticos, recomenda-se o BlueJ.
+
+No BlueJ, eventualmente ocorre um erro ao tentar exibir uma janela em função de erros de acesso ao contexto gráfico. Para evitá-los, basta resetar a máquina virtual sempre antes de executar um código novamente.
 
 ## Documentação - Comandos disponíveis
+
+cor: seleção da cor que está sendo utilizada para o desenho em diversos formatos e uso de transparência;
+desenho: Desenho de formas geométricas e imagens;
+transforma: Que permite o uso de rotações;
+tela: com comandos para solicitar informações ao usuário, tamanho da tela, etc;
+som: Permite o pré-carregamento, execução, pausa e loop de sons WAV;
+mouse: Acesso ao mouse;
+tecla: Acesso ao teclado;
+util: comandos utilitários como o sorteio de números aleatórios e espera.
 
 ### desenho
 
@@ -296,7 +309,7 @@ E pode ver também se um dos dois botões foram pressionados
 
 ```java
 if( Alj.mouse.clickE() ){
-	Alj.tela.exibeMensagem("Você pressionou o botão esquerdo");
+    Alj.tela.exibeMensagem("Você pressionou o botão esquerdo");
 }
 
 if( Alj.mouse.clickD() ){
