@@ -904,7 +904,7 @@ Para incluir fases no motor basta usar o método "adicionaFase" informando a cha
         motorJogo.adicionaFase("faseChefao", c);
 ```
 
-#### Execurtando
+#### Executando
 Para executar o motor, basta informar a fase inicial e opcionalmente, o número de quadros por segundo.
 
 ```java
@@ -973,6 +973,20 @@ public class Tiro extends ObjetoJogo {
 }
 ```
 
+## Classes Extras
+
+### Contador Tempo
+Esta classe permite criar um contador de milissegundos.
+
+```java
+//Cria um objeto para contar o tempo a cada 2 segundos
+ContadorTempo cont = new ContadorTempo(2000);
+
+if(cont.terminou()){
+	//Faz alguma coisa e..
+    cont.reinicia();
+}
+```
 
 ## Conclusão
 
