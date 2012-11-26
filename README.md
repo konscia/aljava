@@ -517,6 +517,8 @@ while(true){
 
 Por hora, podem ser usadas mídias para imagens e sons. Cada arquivo de mídia é representado por um objeto de uma classe. Todos os arquivos utilizados devem estar na pasta raiz do projeto.
 
+Importe as classes desta seção usando "import aljava.midia.*".
+
 ### Imagem
 
 Uma imagem representa um arquivo que pode estar nos formatos "png", "jpg" ou "gif". 
@@ -687,6 +689,197 @@ Variáveis booleanas são utilizadas para garantir que a tecla só pode ser pres
         }
 ```
 
+## Elementos de Jogo
+
+As classes desta seção apresentam elementos importantes para o desenvolvimento de jogos, como colisões e cenários.
+
+São apresentados aqui somente os métodos mais importantes. Para mais métodos, verifique o JavaDoc.
+
+Importe as classes desta seção usando **import aljava.jogo.\***.
+
+
+### Retangulo
+
+A Classe Retangulo é a classe base da maioria dos objetos e contém quatro variáveis (x, y, largura e altura). Ela possui métodos de acesso e modificadores para cada uma das 4 variáveis, métodos para movimentar o X e o Y e métodos para colisão. Geralmente você usará esta classe como superclasse de outras
+
+```java
+public class MeuObjeto extends Retangulo {
+	//Código da classe aqui
+}
+
+//Ao usar o seu objeto, os seguintes métodos da classe Retangulo estarão disponíveis
+//Você pode criar objetos da classe Retangulo por um construtor vazio ou com quatro parâmetros, um para cada uma das variáveis
+//MeuObjeto obj = new MeuObjeto(x, y, largura, altura);
+MeuObjeto obj = new MeuObjeto();
+
+//Métodos de acesso
+int x = obj.pegaX();
+int y = obj.pegaY();
+int largura = obj.pegaLargura();
+int altura = obj.pegaAltura();
+
+//Métodos modificadores
+obj.alteraX( 30 );
+obj.alteraY( 30 );
+obj.alteraLargura( 48 );
+obj.alteraAltura( 48 );
+```
+
+Abaixo, métodos que podem ser usados para movimentar e verificar colisões
+
+```java
+//Movimento do X e do Y
+if( Alj.tecla.press("esquerda") ){
+	obj.moveX(-10); //Move o x dez pixels para a esquerda
+}
+
+if( Alj.tecla.press("baixo") ){
+	obj.moveY(10); //Move o y dez pixels para baixo.
+}
+
+//Colisão.
+
+//Com outro objeto que também seja um retangulo
+if(obj.toca( outroObjetoRetangulo )){
+	//faz alguma coisa
+}
+
+//Com um determinado ponto, por exemplo, o X, Y do mouse
+int xMouse = Alj.mouse.x();
+int yMouse = Alj.mouse.y();
+if(obj.toca(xMouse, yMouse)){
+	//Faz alguma coisa
+}
+ 
+```
+
+### RetanguloGravidade
+
+Esta classe estende a classe Retangulo e adiciona métodos para processar a gravidade e realizar pulos.
+
+```java
+public class MeuObjeto extends RetanguloGravidade { /*...*/ }
+//...
+MeuObjeto obj = new MeuObjeto();
+while(true){
+	//processa gravidade
+    obj.processa();
+    //Pula ao pressionar espaço
+    if(Alj.tecla.press("espaco")){
+    	//O 15 é a força do pulo
+    	obj.pula(15);
+    }
+}
+```
+
+Para que a gravidade funciona são necessários o valor do chão e o próprio valor da gravidade. Estes valores podem ser alterados via variáveis públicas estáticas.
+
+```java
+//O padrão para o chão é 400
+RetanguloGravidade.CHAO = 380;
+//O padrão da gravidade é 1
+RetanguloGravidade.GRAVIDADE = 0.7;
+```
+
+### CenaComColisao
+
+Uma CenaComColisao é uma extensão da classe Cena. A classe CenaComColisao se diferencia apenas por acrescentar colisão, porém, como verificou-se que nenhum dos projetos em sala utilizava somente a classe Cena, somente está documentada a classe CenaComColisao.
+
+Uma CenaComColisao consiste em um conjunto de "tiles" (pequenos quadrados representados por imagens) desenhados a partir de um arquivo de configuração e que podem ser sólidos ou não.
+
+Objetos do tipo Retangulo podem ser adicionados ao Cenário e movimentados com ele.
+
+Segue abaixo exemplo de um arquivo de configuração de uma cena:
+
+Arquivo __cena.txt__
+```java
+2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+2,2,2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2,2
+1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,2,1,1,1,1,2,2,2,1,1
+1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,1,1,2,2,1,1,1,1,1,2,2,2,2,1,2,2,2,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,1,1,1,1,1,1,1,1,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2
+1,1,1,1,1,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2
+1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,1,1,1,1,2,2,2,2,2,2,2,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,1,1,2,2,1,1,1,1,1,2,2,2,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,1,1,1,1,1,2,1,1,2,2,3,2,2,2,1,1,1,1,2,2,2,2,2
+1,1,1,1,1,2,2,2,2,1,1,1,1,2,1,1,1,1,1,1,1,2,2,2,2,3,3,3,2,1,1,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,1,1,1,1,1,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2
+```
+
+Para desenhar este cenário é usado o seguinte código:
+
+```java
+CenaComColisao cena1;
+//...
+cena1 = new CenaComColisao("cena.txt");
+//Configura que todos os números 1 usarão a imagem terra.png
+cena1.configTile(1, "terra.png");
+//Configura imagem do número 2 informando o terceiro parâmetro como verdadeiro, isso significa que este bloco é sólido
+cena1.configTile(2, "fundo.jpg", true);
+//Faz uma parede fantasma usando a mesma imagem do bloco sólido, porém, sem solidez
+cena1.configTile(3, "fundo.jpg");
+//Configura o tamanho de cada Tile.
+cena1.tamanhoTiles(32, 32);
+```
+
+Além disso podemos adicionar objetos que realizam colisão com os tiles do cenário e objetos que são movimentados junto do cenário, ou seja, se o cenário se mover para a esquerda os objetos se movem junto, executando o efeito dos objetos estarem realmente dentro do cenário. As duas operações são diferentes e são feitas com os seguintes métodos.
+
+```java
+//Adiciona objetos para realizar colisão com o cenário
+cena1.adicionaObjeto(jogador);
+cena1.adicionaObjeto(inimigo1);
+cena1.adicionaObjeto(inimigo2);
+
+//Adiciona objetos que se movimentarão junto do cenário
+//O jogador não é incluído porque ele deve ficar fixo na tela e quem se move na verdad eé o cenário. Esta tarefa é feita pela classe camera.
+cena1.moveComCenario(inimigo1);
+cena1.moveComCenario(inimigo2);         
+```
+
+__Obs__: Todos os objetos adicionados devem ser do tipo Retangulo.
+
+Por fim, no loop do jogo, o cenário deve ser processado para realizar os cálculos de colisão e movimento dos objetos.
+
+```java
+...
+cena1.processa();
+...
+```
+
+### Camera
+
+A classe Camera implementa a lógica de, a partir do movimento de um determinado retangulo, movimentar o cenário para ter a sensação de que existe uma câmera acompanhando o objeto.
+
+Para usá-la, basta informar um objeto da classe Cena e outro da Classe Retangulo.
+
+```java
+Camera cam = new Camera(cena1, jogador);
+```
+
+Para que os cálculos de acompanhamento da câmera sejam realizados, basta executar o método "processa".
+
+```java
+...
+cam.processa();
+...
+```
+
+## Framework
+
+As classes desta seção devem usadas em conjunto para construir uma arquitetura escalável de jogo, com diversas fases e objetos.
+
+Importe as classes desta seção usando **import aljava.jogo.\***.
+
+### Motor
+
+### MotorSingleton
+
+### Interface Fase
+
+### Classe Abstrata ObjetoJogo
+
 
 ## Conclusão
 
@@ -697,7 +890,7 @@ Assim, nossos primeiros programas podem ganhar um pouco mais de vida e dinamismo
 E tudo isso, ainda usando Java, uma linguagem poderosa e profissional.
 Espero que gostem.
 
-## Inspiração e agradecimentos
+### Inspiração e agradecimentos
 
 À criatividade e disposição dos meus alunos que tem encarado comigo o desafio de aprender programação de um modo que vale a pena, divertido, voltado para aproveitar o máximo do potencial criativo que o computador pode nos oferecer.
 
