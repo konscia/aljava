@@ -40,33 +40,37 @@ Alj.tela.exibe();
 
 **Obs:** Para que um desenho efetivamente seja exibido na tela, o método __Alj.tela.exibe()__ deve ser executado.
 
+Além dos comandos da classe "Alj" existem diversas outras classes que podem ser utilizadas conforme documentado nas seções abaixo.
+
 ### IDE - Ambiente de Programação
 
 A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a usá-lo livremente. Qualquer ambiente de programação (Netbeans, Eclipse, JCreator, etc) pode ser utilizado. Para fins didáticos, recomenda-se o BlueJ.
 
 No BlueJ, eventualmente ocorre um erro ao tentar exibir uma janela em função de erros de acesso ao contexto gráfico. Para evitá-los, basta resetar a máquina virtual sempre antes de executar um código novamente.
 
-## Documentação - Comandos disponíveis
+## Desenho, Tela e Utilitáros
 
-cor: seleção da cor que está sendo utilizada para o desenho em diversos formatos e uso de transparência;
-desenho: Desenho de formas geométricas e imagens;
-transforma: Que permite o uso de rotações;
-tela: com comandos para solicitar informações ao usuário, tamanho da tela, etc;
-som: Permite o pré-carregamento, execução, pausa e loop de sons WAV;
-mouse: Acesso ao mouse;
-tecla: Acesso ao teclado;
-util: comandos utilitários como o sorteio de números aleatórios e espera.
+Toda esta seção está disponível através de comandos acessados a partir da classe "Alj". Os comandos estão divididos em grupos conforme descrição abaixo:
 
-### desenho
+**desenho**: Desenho de formas geométricas básicas (retângulos, triângulos, ovais, linhas e polígonos). Também é possível desenhar textos com tamanhos de fonte variados;
+**cor**: comandos que alteram a cor que está sendo utilizada para o desenho. A cor pode ser alterada usando valores hexadecimais, RGB ou mesmo através de algumas Strings padronizadas. Também é possível informar o nível de transparência de uma cor;
+**transforma**: Comandos que permitem o uso de rotações nas imagens desenhadas;
+**tela**: Comandos para solicitar informações ao usuário e demais operações ligadas a janela principal do jogo;
+**mouse**: Métodos de acesso ao mouse;
+**tecla**: Métodos de acesso ao teclado;
+**util**: comandos utilitários como o sorteio de números aleatórios.
 
-Este pacote permite o desenho de diversas formas geométricas e imagens.
+### Desenho
 
-#### Linha
+Todos os métodos de desenho utilizam a cor que foi definida. Inicialmente a cor definida é preto, para alterá-la, veja a seção "Cores".
+
+#### Linhas
 Uma linha representa a ligação entre dois pontos. 
 Os parâmetros são o x, y do ponto inicial e o x, y do ponto final.
 
 ```java
-//Alj.desenha.linha(x, y, xFinal, yFinal);
+//assinatura do método
+Alj.desenha.linha(int x, int y, int xFinal, int yFinal);
 
 //Linha diagonal na tela
 Alj.desenha.linha(0, 0, 400, 400);
@@ -75,29 +79,47 @@ Alj.desenha.linha(0, 0, 400, 400);
 Alj.desenha.linha(0, 400, 200, 200);
 ```
 
-#### Retângulo
+#### Retângulos
 Um retângulo inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura.
 
 ```java
-//Alj.desenha.retangulo(x, y, largura, altura);
+//assinatura do método
+Alj.desenha.retangulo(int x, int y, int largura, int altura);
+
+//Um retângulo de 300 de largura por 100 de altura no ponto 20, 20
 Alj.desenha.retangulo(20, 20, 300, 100);
+```
+
+#### Borda dos Retângulos
+Também é possível desenhar somente o contorno da borda do retângulo. Os parâmetros são os mesmos.
+
+```java
+//assinatura do método
+Alj.desenha.retanguloBorda(int x, int y, int largura, int altura);
+
+//Um retângulo de 300 de largura por 100 de altura no ponto 20, 20
+Alj.desenha.retanguloBorda(20, 20, 300, 100);
 ```
 
 #### Oval
 Uma oval inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura.
-Você pode fazer um círculo com a altura = largura.
 
 ```java
-//Alj.desenha.oval(x, y, largura, altura);
+//assinatura do método
+Alj.desenha.oval(int x, int y, int largura, int altura);
+
+//Uma oval de 300 de largura por 100 de altura no ponto 20, 20
 Alj.desenha.oval(20, 20, 300, 100);
 ```
 
 #### Triangulo
-Uma triângulo inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura.
-Este triângulo sempre tem a ponta para cima. Para construir triângulos de lado ou para baixo, use-o em conjunto com o comando Alj.transforma.rotaciona( ... )
+Uma triângulo inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura. Este triângulo sempre tem a ponta para cima. Para construir triângulos de lado ou para baixo, use-o em conjunto com o comando Alj.transforma.rotaciona( ... ) apresentado na seção "Transformações".
 
 ```java
-//Alj.desenha.triangulo(x, y, largura, altura);
+//assinatura do método
+Alj.desenha.trinagulo(int x, int y, int largura, int altura);
+
+//Uma triângulo de 300 de largura por 100 de altura no ponto 20, 20
 Alj.desenha.triangulo(20, 20, 300, 100);
 ```
 
@@ -106,7 +128,9 @@ Você pode desenhar qualquer forma geométrica usando polígonos.
 Polígonos são sequencias de pontos. Para desenhar um polígono, basta passar um array de pontos x e um array de pontos y.
 
 ```java
+//Assinatura do método
 //Alj.desenha.poligono(int x[], int y[]);
+
 int xs[] = {100, 200, 300, 150, 100};
 int ys[] = {100, 100, 200, 150, 100};
 Alj.desenha.poligono(xs, ys);
@@ -124,14 +148,6 @@ pol.addPoint(400, 350);
 pol.addPoint(200, 150);
 pol.addPoint(100, 100);
 Alj.desenha.poligono(pol);
-```
-
-#### Imagens
-Uma imagem pode ser desenhada em um ponto x, y da tela.
-As imagens devem estar na raiz do projeto. Sugiro que sempre use dentro da raiz uma pasta "imagens".
-
-```java
-Alj.desenha.imagem(x, y, "imagens/Ryu.png");
 ```
 
 ### cor
