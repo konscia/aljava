@@ -32,38 +32,996 @@
       <section>
         <div id="title">
           <h1>Aljava</h1>
-          <p>Aljava</p>
+          <p>Framework Java para Ensino de Orientação a Objetos usando jogos2D</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/kaleucaminha">kaleucaminha</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
         </div>
 
-        <h3>Welcome to GitHub Pages.</h3>
+        <h1>Livro de Receitas Aljava </h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Aljava é um framework Java desenvolvido para o ensino de Orientação a Obejtos tendo como foco o desenvolvimento de jogos.
+O Framework também pode ser usado como uma biblioteca de classes úteis que dentre outras coisas realizam o desenho de formas geométricas, imagens, execução de sons e colisões envolvendo Retângulos.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>O framework pode ser dividido nas seguintes seções</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<ul>
+<li>
+<strong>Desenho, Tela e Utilitáros</strong>: Métodos usados para desenhar formas geométricas utilizando diversas cores, recursos de transparência e colisão, além de métodos para recuperar textos e números informados pelos usuários. Outros métodos utilitários como um sorteador de números também estão disponíveis; </li>
+<li>
+<strong>Mídia</strong>: Classes para desenho de imagens, animações e execução de sons;</li>
+<li>
+<strong>Elementos de Jogo</strong>: Classes para construção de cenários, realização de colisão, tratamento de gravidade;</li>
+<li>
+<strong>Framework</strong>: Uso das quatro classes responsáveis por transformar o Aljava em um mini Framework para o desenvolvimento de jogos.</li>
+</ul><h2>Início</h2>
 
-<h3>Designer Templates</h3>
+<p>Esta seção descreve questões iniciais básicas para o uso do Aljava nos seus projetos.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h3>Instalação</h3>
 
-<h3>Rather Drive Stick?</h3>
+<p>Basta adicionar ao seu projeto o arquivo <strong>Aljava.jar</strong> que está disponível <a href="https://github.com/kaleucaminha/aljava/blob/master/Aljava.jar">aqui</a>. Ele tem tudo que é necessário.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h3>Execução</h3>
 
-<h3>Authors and Contributors</h3>
+<p>Para iniciar com a classe Alj basta importá-la e executar alguns dos seus comandos. Ao importar a classe uma janela de 400x400 é criada para o jogo, todos os comandos são baseados nesta janela.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">aljava.Alj</span><span class="o">;</span>
+</pre></div>
 
-<h3>Support or Contact</h3>
+<p>Segue abaixo alguns exemplos de comandos disponíveis na classe Alj.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retangulo</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">nome</span><span class="o">(</span><span class="s">"verde"</span><span class="o">);</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="s">"Aljava - Programação é massa."</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
+
+<span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+</pre></div>
+
+<p><strong>Obs:</strong> Para que um desenho efetivamente seja exibido na tela, o método <strong>Alj.tela.exibe()</strong> deve ser executado.</p>
+
+<p>Além dos comandos da classe "Alj" existem diversas outras classes que podem ser utilizadas conforme documentado nas seções abaixo.</p>
+
+<h3>IDE - Ambiente de Programação</h3>
+
+<p>A lib Aljava está em um JAR. Você pode incluí-lo em seu projeto e começar a usá-lo livremente. Qualquer ambiente de programação (Netbeans, Eclipse, JCreator, etc) pode ser utilizado. Para fins didáticos, recomenda-se o BlueJ.</p>
+
+<p>No BlueJ, eventualmente ocorre um erro ao tentar exibir uma janela em função de erros de acesso ao contexto gráfico. Para evitá-los, basta resetar a máquina virtual sempre antes de executar um código novamente.</p>
+
+<h2>Desenho, Tela e Utilitáros</h2>
+
+<p>Toda esta seção está disponível através de comandos acessados a partir da classe "Alj". Os comandos estão divididos em grupos conforme descrição abaixo:</p>
+
+<p><strong>desenho</strong>: Desenho de formas geométricas básicas (retângulos, triângulos, ovais, linhas e polígonos). Também é possível desenhar textos com tamanhos de fonte variados;
+<strong>cor</strong>: comandos que alteram a cor que está sendo utilizada para o desenho. A cor pode ser alterada usando valores hexadecimais, RGB ou mesmo através de algumas Strings padronizadas. Também é possível informar o nível de transparência de uma cor;
+<strong>transforma</strong>: Comandos que permitem o uso de rotações nas imagens desenhadas;
+<strong>tela</strong>: Comandos para solicitar informações ao usuário e demais operações ligadas a janela principal do jogo;
+<strong>mouse</strong>: Métodos de acesso ao mouse;
+<strong>tecla</strong>: Métodos de acesso ao teclado;
+<strong>util</strong>: comandos utilitários como o sorteio de números aleatórios.</p>
+
+<h3>Desenho</h3>
+
+<p>Todos os métodos de desenho utilizam a cor que foi definida. Inicialmente a cor definida é preto, para alterá-la, veja a seção "Cores".</p>
+
+<h4>Linhas</h4>
+
+<p>Uma linha representa a ligação entre dois pontos. 
+Os parâmetros são o x, y do ponto inicial e o x, y do ponto final.</p>
+
+<div class="highlight"><pre><span class="c1">//assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">linha</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">xFinal</span><span class="o">,</span> <span class="kt">int</span> <span class="n">yFinal</span><span class="o">);</span>
+
+<span class="c1">//Linha diagonal na tela</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">linha</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+
+<span class="c1">//Linha horizontal no meio da tela</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">linha</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">400</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+</pre></div>
+
+<h4>Retângulos</h4>
+
+<p>Um retângulo inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura.</p>
+
+<div class="highlight"><pre><span class="c1">//assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retangulo</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">largura</span><span class="o">,</span> <span class="kt">int</span> <span class="n">altura</span><span class="o">);</span>
+
+<span class="c1">//Um retângulo de 300 de largura por 100 de altura no ponto 20, 20</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retangulo</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+</pre></div>
+
+<h4>Borda dos Retângulos</h4>
+
+<p>Também é possível desenhar somente o contorno da borda do retângulo. Os parâmetros são os mesmos.</p>
+
+<div class="highlight"><pre><span class="c1">//assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retanguloBorda</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">largura</span><span class="o">,</span> <span class="kt">int</span> <span class="n">altura</span><span class="o">);</span>
+
+<span class="c1">//Um retângulo de 300 de largura por 100 de altura no ponto 20, 20</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retanguloBorda</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+</pre></div>
+
+<h4>Oval</h4>
+
+<p>Uma oval inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura.</p>
+
+<div class="highlight"><pre><span class="c1">//assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">largura</span><span class="o">,</span> <span class="kt">int</span> <span class="n">altura</span><span class="o">);</span>
+
+<span class="c1">//Uma oval de 300 de largura por 100 de altura no ponto 20, 20</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+</pre></div>
+
+<h4>Triangulo</h4>
+
+<p>Uma triângulo inicia com o canto superior esquerdo em uma coordenada x, y e possui uma largura e uma altura. Este triângulo sempre tem a ponta para cima. Para construir triângulos de lado ou para baixo, use-o em conjunto com o comando Alj.transforma.rotaciona( ... ) apresentado na seção "Transformações".</p>
+
+<div class="highlight"><pre><span class="c1">//assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">trinagulo</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">largura</span><span class="o">,</span> <span class="kt">int</span> <span class="n">altura</span><span class="o">);</span>
+
+<span class="c1">//Uma triângulo de 300 de largura por 100 de altura no ponto 20, 20</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">triangulo</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+</pre></div>
+
+<h4>Polígonos</h4>
+
+<p>Você pode desenhar qualquer forma geométrica usando polígonos.
+Polígonos são sequencias de pontos. Para desenhar um polígono, basta passar um array de pontos x e um array de pontos y.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="c1">//Alj.desenha.poligono(int x[], int y[]);</span>
+
+<span class="kt">int</span> <span class="n">xs</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">150</span><span class="o">,</span> <span class="mi">100</span><span class="o">};</span>
+<span class="kt">int</span> <span class="n">ys</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">150</span><span class="o">,</span> <span class="mi">100</span><span class="o">};</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">poligono</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys</span><span class="o">);</span>
+</pre></div>
+
+<p>Alternativamente, você pode usar um objeto da classe Polygon.</p>
+
+<div class="highlight"><pre><span class="c1">//não esqueça de importar a classe Polygon para usá-la</span>
+<span class="c1">//Ex: import java.awt.Polygon;</span>
+
+<span class="n">Polygon</span> <span class="n">pol</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Polygon</span><span class="o">();</span>
+<span class="n">pol</span><span class="o">.</span><span class="na">addPoint</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+<span class="n">pol</span><span class="o">.</span><span class="na">addPoint</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">350</span><span class="o">);</span>
+<span class="n">pol</span><span class="o">.</span><span class="na">addPoint</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">150</span><span class="o">);</span>
+<span class="n">pol</span><span class="o">.</span><span class="na">addPoint</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">poligono</span><span class="o">(</span><span class="n">pol</span><span class="o">);</span>
+</pre></div>
+
+<h4>Textos</h4>
+
+<p>Textos podem ser desenhados em qualquer posição X, Y da tela. Alternativamente, você pode informar um quarto parâmetro para o tamanho da fonte. Não é possível mudar a fonte dos textos e a quebra de linha também não é feita pelo método.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método </span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="n">String</span> <span class="n">texto</span><span class="o">);</span>
+<span class="c1">//ou</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="n">String</span> <span class="n">texto</span><span class="o">,</span> <span class="kt">int</span> <span class="n">tamanhoFonte</span><span class="o">);</span>
+
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="s">"Aljava - Programação que vale o esforço."</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
+</pre></div>
+
+<h3>Cores</h3>
+
+<p>Todos os desenhos acima podem receber transparência ou uma cor. Você pode mudar a cor de diversas formas, escolha a que preferir.</p>
+
+<h4>Mudar cor pelo nome</h4>
+
+<p>Existem alguns nomes de cores pré-definidos que podem ser usados como uma String. Isso é útil no início do aprendizado de programação, principalmente para os primeiros exercícios.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">nome</span><span class="o">(</span><span class="n">String</span> <span class="n">nomeCor</span><span class="o">);</span>
+
+<span class="c1">//Usando a cor vermelha</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">nome</span><span class="o">(</span><span class="s">"vermelho"</span><span class="o">);</span>
+</pre></div>
+
+<p>As cores disponíveis são: "vermelho", "laranja", "ciano", "preto", "azul", "amarelo", "verde", "magenta" e "branco".</p>
+
+<h4>Mudar cor pelo RGB</h4>
+
+<p>Uma cor é formada por uma quantidade de vermelho (R), verde (G) e azul (B). Estes valores variam de 0 (mais escuro) até 255 (mais claro). Este comando tem três parâmetros, um para cada das três cores e é o mais útil para criar pequenas animações com cores.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">g</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="c1">//Inforando uma cor com alta quantidade de vermelho</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</pre></div>
+
+<h4>Hexadecimal #006699</h4>
+
+<p>Desenvolvedores que tenham conhecimento de web e estejam acostumados com o formato hexadecimal, podem usá-lo também. Qualquer cor hexadecimal pode ser informada como uma String.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">hexadecimal</span><span class="o">(</span><span class="n">String</span> <span class="n">hexadecimal</span><span class="o">);</span>
+
+<span class="c1">//Exemplo de uma cor tendendo para o verde</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">hexadecimal</span><span class="o">(</span><span class="s">"#336699"</span><span class="o">);</span>
+</pre></div>
+
+<h4>Objeto Color</h4>
+
+<p>Desenvolvedores mais avançados podem usar um objeto da classe Color do Java.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">objeto</span><span class="o">(</span><span class="n">Color</span> <span class="n">cor</span><span class="o">);</span>
+
+<span class="c1">//Exemplo da mesma cor informada pelo formato RGB</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">objeto</span><span class="o">(</span> <span class="k">new</span> <span class="n">Color</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">100</span><span class="o">,</span><span class="mi">10</span><span class="o">)</span> <span class="o">);</span>
+</pre></div>
+
+<h4>Alterar a transparência</h4>
+
+<p>Outro recurso útil é o uso de transparências. Você pode informar a transparência com uma porcentagem que varia de 0 até 100. Quanto maior o valor, maior a transparência.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">transparencia</span><span class="o">(</span><span class="kt">int</span> <span class="n">porcentagem</span><span class="o">);</span>
+
+<span class="c1">//Exemplo de 50% de transparência</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">transparencia</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+</pre></div>
+
+<h3>Transformação</h3>
+
+<p>O objetivo deste grupo de comandos e poder realizar transformações como escala e rotação nos desenhos, por hora, somente rotação está disponível.</p>
+
+<h4>Rotação</h4>
+
+<p>A rotação é sempre aplicada diretamente ao ambiente de desenho. Desse modo, é sempre importante informar qual o eixo x, y que será utilizado para a rotação.</p>
+
+<div class="highlight"><pre><span class="c1">//Assinatura do método</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">transforma</span><span class="o">.</span><span class="na">rotaciona</span><span class="o">(</span><span class="kt">int</span> <span class="n">angulo</span><span class="o">,</span> <span class="kt">int</span> <span class="n">xCentra</span><span class="o">,</span> <span class="kt">int</span> <span class="n">yCentral</span><span class="o">);</span>
+</pre></div>
+
+<p>Se você quiser uma determinada forma geométrica seja rotacionada, precisará rotacionar a tela usando como eixo o centro da figura, e, após o desenho, limpar a rotação para que ela não afete os próximos desenhos.</p>
+
+<p>Exemplo de um losango (Quadrado rotacionado em 90 graus).</p>
+
+<div class="highlight"><pre><span class="c1">//Define x e y da posição central da rotação</span>
+<span class="kt">int</span> <span class="n">xCentral</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="o">(</span><span class="n">largura</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">yCentral</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="o">(</span><span class="n">altura</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+
+<span class="c1">//Executa Rotação</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">transforma</span><span class="o">.</span><span class="na">rotaciona</span><span class="o">(</span><span class="mi">90</span><span class="o">,</span> <span class="n">xCentral</span><span class="o">,</span> <span class="n">yCentral</span><span class="o">);</span>
+<span class="c1">//Faz o desenho</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retangulo</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">largura</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+<span class="c1">//Limpa a rotação para que os próximos desenhos não sejam afetados.</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">transforma</span><span class="o">.</span><span class="na">limpaRotacao</span><span class="o">();</span>
+</pre></div>
+
+<h3>Tela</h3>
+
+<p>A Aljava é sempre baseada em uma tela. Os comandos deste pacote ajudam a trabalhar com ela e com entrada de dados que devem vir do usuário através de janelas pop-up.</p>
+
+<h4>Exibir a Tela</h4>
+
+<p>Todos os desenhos só serão exibidos na tela após a execução deste método. Antes disso, ficam em um buffer de desenho escondido. Isso evita que a tela fique "piscando".</p>
+
+<div class="highlight"><pre><span class="c1">//Lembre-se de sempre executar este método após desenhar qualquer coisa (que você queira ver na tela).</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+</pre></div>
+
+<h4>Limpar</h4>
+
+<p>Antes de iniciar o desenho de um novo frame da sua aplicação, você pode querer limpar a tela. Basicamente limpar a tela é desenhar um retângulo branco por cima de tudo. Este método é um atalho para isso.</p>
+
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpar</span><span class="o">();</span>
+</pre></div>
+
+<h4>Alterar o tamanho</h4>
+
+<p>A tela tem por padrão 400 pixels de largura por 400 de altura. Para alterar este tamanho, use:</p>
+
+<div class="highlight"><pre><span class="c1">//Alj.inicializa(int largura, int altura)</span>
+<span class="n">Alj</span><span class="o">.</span><span class="na">inicializa</span><span class="o">(</span><span class="mi">800</span><span class="o">,</span> <span class="mi">600</span><span class="o">);</span>
+</pre></div>
+
+<p><strong>OBS</strong>: Este método não usa o grupo "tela" na assinatura pois a intenção é no futuro transformá-lo em um inicializador da janela.  </p>
+
+<h4>Finalizar</h4>
+
+<p>Para encerrar o programa e fechar a janela, execute:</p>
+
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">finalizar</span><span class="o">();</span>
+</pre></div>
+
+<h4>Exibir Mensagem</h4>
+
+<p>Frequentemente é útil exibir mensagens ao usuário como "Parabéns, você venceu.". Para isto, use:</p>
+
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibeMensagem</span><span class="o">(</span><span class="s">"Parabéns, você venceu.\n\nTente novamente."</span><span class="o">)</span>
+</pre></div>
+
+<p><strong>Obs:</strong> use \n para quebra de linha na janela.</p>
+
+<h4>Solicitar Texto ao usuário</h4>
+
+<p>Você também pode solicitar que o usuário lhe informe um texto qualquer, como por exemplo, o seu nome.</p>
+
+<div class="highlight"><pre><span class="n">String</span> <span class="n">nome</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaTexto</span><span class="o">(</span><span class="s">"Por favor, informe seu nome."</span><span class="o">);</span>
+</pre></div>
+
+<h4>Solicitar Números ao usuário</h4>
+
+<p>Você também pode solicitar que o usuário lhe informe um número qualquer, como por exemplo, para um par ou ímpar.</p>
+
+<div class="highlight"><pre><span class="kt">int</span> <span class="n">numero</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaNumero</span><span class="o">(</span><span class="s">"1, 2, 3 e já..."</span><span class="o">);</span>
+</pre></div>
+
+<p>Alternativamente, você pode solicitar um double</p>
+
+<div class="highlight"><pre><span class="kt">double</span> <span class="n">numero</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaNumeroDouble</span><span class="o">(</span><span class="s">"Informe o preço do produto:"</span><span class="o">);</span>
+</pre></div>
+
+<h3>Mouse</h3>
+
+<p>O mouse é um dos recursos que possibilitam maior interação com o usuário.
+Sempre que necessário você pode pegar a posicão x, y do mouse com os métodos:</p>
+
+<div class="highlight"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">x</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">y</span><span class="o">();</span>
+</pre></div>
+
+<p>E pode ver também se um dos três botões do mouse foram pressionados</p>
+
+<div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickE</span><span class="o">()</span> <span class="o">){</span>
+    <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibeMensagem</span><span class="o">(</span><span class="s">"Você pressionou o botão esquerdo"</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickM</span><span class="o">()</span> <span class="o">){</span>
+    <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibeMensagem</span><span class="o">(</span><span class="s">"Você pressionou o botão do meio"</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickD</span><span class="o">()</span> <span class="o">){</span>
+    <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibeMensagem</span><span class="o">(</span><span class="s">"Você pressionou o botão direito"</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>Teclado</h3>
+
+<p>Por enquanto a Aljava só permite saber se em um dado momento, uma tecla está ou não pressionada.</p>
+
+<div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"esquerda"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">moveHorizontal</span><span class="o">(-</span><span class="mi">10</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"direita"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">moveHorizontal</span><span class="o">(+</span><span class="mi">10</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"cima"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">moveVertical</span><span class="o">(-</span><span class="mi">10</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"baixo"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">moveVertical</span><span class="o">(+</span><span class="mi">10</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>As teclas disponíveis com String são: "enter", "espaco", "esquerda", "direita", "cima","baixo", todas as letras de "a" até "z", todos os números de 0 até 9 e todos os números do "NUMPAD" através das Strings "NUMPAD0", "NUMPAD2", etc.</p>
+
+<p>Alternativamente, você pode usar o código da tecla com as constantes da classe KeyEvent do Java.</p>
+
+<div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span> <span class="n">KeyEvent</span><span class="o">.</span><span class="na">VK_TAB</span> <span class="o">)</span> <span class="o">){</span>
+    <span class="n">executaEspecial</span><span class="o">();</span>
+<span class="o">}</span>
+
+</pre></div>
+
+<h3>Utilitários</h3>
+
+<p>Neste grupo estão alguns comandos utilitários que não se encaixam em nenhum dos grupos anteriores.</p>
+
+<h4>Espera</h4>
+
+<p>Em jogos, é muito comum precisarmos pedir para o computador esperar alguns instantes antes de executar uma ação ou partir para o frame seguinte do jogo. Podemos fazer isso, esperando alguns milisegundos com:</p>
+
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">espera</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+</pre></div>
+
+<h4>Números aleatórios</h4>
+
+<p>Você pode sortear um número entre um mínimo e um máximo. </p>
+
+<div class="highlight"><pre><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">sorteia</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</pre></div>
+
+<p>Alternativamente, você pode sortear um double passando valores double como parâmetros</p>
+
+<div class="highlight"><pre><span class="kt">double</span> <span class="n">num</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">sorteia</span><span class="o">(</span><span class="mf">1.5</span><span class="o">,</span> <span class="mf">3.5</span><span class="o">);</span>
+</pre></div>
+
+<h2>Exemplos Completos</h2>
+
+<p>Encerramos o detalhamento dos comandos com os utilitários. Agora, seguem alguns exemplos utilizando comandos de diferentes pacotes. </p>
+
+<h3>Cores + Desenho</h3>
+
+<div class="highlight"><pre>    <span class="c1">//Cria uma variável para o valor da trasnparência. </span>
+    <span class="c1">//Inicialmente os desenhos começarão transparentes</span>
+    <span class="kt">int</span> <span class="n">transparencia</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+
+    <span class="c1">//Inicia loop que irá desenhar as formas geométricas uma vez para cda valor inteiro entre 100 e 0.</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">transparencia</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
+      <span class="n">transparencia</span> <span class="o">-=</span> <span class="mi">1</span><span class="o">;</span>
+
+      <span class="c1">//Limpa telae e configura cor laranja</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpa</span><span class="o">();</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+
+      <span class="c1">//Desenha um texto informando o valor da transparência com uma linha abaixo para dar um estilo visual agradável. Este texto deve estar sempre exibido, portanto, sua transparência é 0</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">transparencia</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">28</span><span class="o">,</span> <span class="s">"Transparência: "</span><span class="o">+</span><span class="n">transparencia</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">linha</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="mi">290</span><span class="o">,</span> <span class="mi">42</span><span class="o">);</span>
+
+      <span class="c1">//Desenha as três formas geométricas mais básicas com o valor da transparência conforme a variável "transparência"</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">transparencia</span><span class="o">(</span><span class="n">transparencia</span><span class="o">);</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">retangulo</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">170</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">40</span><span class="o">);</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">60</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">40</span><span class="o">);</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">triangulo</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">120</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">40</span><span class="o">);</span>
+
+      <span class="c1">//Desenha um polígono usando 5 pontos</span>
+      <span class="c1">//Coordenadas x e y do polígono, Ex: 100,100 -&gt; 200, 100 -&gt; 300, 200, etc...</span>
+      <span class="kt">int</span> <span class="n">xs</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">150</span><span class="o">,</span> <span class="mi">100</span><span class="o">};</span>
+      <span class="kt">int</span> <span class="n">ys</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">150</span><span class="o">,</span> <span class="mi">100</span><span class="o">};</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">poligono</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys</span><span class="o">);</span>
+
+      <span class="c1">//Exibe os desenhos</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span> 
+      <span class="c1">//Faz uma pausa para demosntrar o efeito da animação</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">espera</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+    <span class="o">}</span>       
+</pre></div>
+
+<h3>Mini Paint</h3>
+
+<div class="highlight"><pre><span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>      
+        <span class="kt">int</span> <span class="n">xMouse</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">x</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">yMouse</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">y</span><span class="o">();</span>
+
+        <span class="c1">//Sempre desenha um pequeno círculo na posição do mouse</span>
+        <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="n">xMouse</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">yMouse</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+
+        <span class="c1">//Se o botão esquerdo estiver pressionado,</span>
+        <span class="c1">//desenha um círculo vermelho maior</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickE</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="n">xMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="n">yMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//Se o botão do meio estiver pressionado</span>
+        <span class="c1">//desenha um círculo verde maior</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickM</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">255</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="n">xMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="n">yMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//Se o botão do direito estiver pressionado</span>
+        <span class="c1">//desenha um círculo azul maior</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">clickD</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">rgb</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">255</span><span class="o">);</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="n">xMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="n">yMouse</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>   
+<span class="o">}</span>  
+</pre></div>
+
+<h3>Teclado e Tela</h3>
+
+<div class="highlight"><pre><span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibeMensagem</span><span class="o">(</span><span class="s">"Olá. Pressione Enter para mudar a largura e altura da janela."</span><span class="o">);</span>
+<span class="c1">//Inicializa uma janela com a largura e altura padrão    </span>
+<span class="kt">int</span> <span class="n">largura</span> <span class="o">=</span> <span class="mi">740</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">altura</span> <span class="o">=</span> <span class="mi">180</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">textoQualquer</span> <span class="o">=</span> <span class="s">"Aqui vai um texto que você informar"</span><span class="o">;</span>  
+<span class="n">Alj</span><span class="o">.</span><span class="na">inicializa</span><span class="o">(</span><span class="n">largura</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+<span class="c1">//Entra no loop para esperar o usuário pressionar enter</span>
+<span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>            
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpa</span><span class="o">();</span>  
+      <span class="c1">//Quando o enter for pressionado, pega uma nova largura, uma nova altura e o texto a ser exibido</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"enter"</span><span class="o">)){</span>
+        <span class="n">largura</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaNumero</span><span class="o">(</span><span class="s">"Informe a largura:"</span><span class="o">);</span>
+        <span class="n">altura</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaNumero</span><span class="o">(</span><span class="s">"Informe a altura:"</span><span class="o">);</span>
+        <span class="n">textoQualquer</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">solicitaTexto</span><span class="o">(</span><span class="s">"Ïnforme um texto qualquer:"</span><span class="o">);</span>
+        <span class="c1">//e re-inicializa a janela com a altura especificada</span>
+        <span class="n">Alj</span><span class="o">.</span><span class="na">inicializa</span><span class="o">(</span><span class="n">largura</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="c1">//Desenha a largura e a altura da janela</span>
+      <span class="n">String</span> <span class="n">tamanhoTela</span> <span class="o">=</span> <span class="n">largura</span><span class="o">+</span><span class="s">" x "</span><span class="o">+</span><span class="n">altura</span><span class="o">;</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">60</span><span class="o">,</span> <span class="n">tamanhoTela</span><span class="o">,</span> <span class="mi">40</span><span class="o">);</span>
+      <span class="c1">//Desenha o texto informado</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="n">textoQualquer</span><span class="o">,</span> <span class="mi">40</span><span class="o">);</span>
+
+      <span class="c1">//Exibe</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+      <span class="n">Alj</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">espera</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+    <span class="o">}</span> 
+</pre></div>
+
+<h2>Mídia</h2>
+
+<p>Por hora, podem ser usadas mídias para imagens e sons. Cada arquivo de mídia é representado por um objeto de uma classe. Todos os arquivos utilizados devem estar na pasta raiz do projeto.</p>
+
+<p>Importe as classes desta seção usando "import aljava.midia.*".</p>
+
+<h3>Imagem</h3>
+
+<p>Uma imagem representa um arquivo que pode estar nos formatos "png", "jpg" ou "gif". 
+Uma imagem possui métodos para desenhá-la, alterar largura, altura ou invertê-la. </p>
+
+<div class="highlight"><pre><span class="n">Imagem</span> <span class="n">img</span><span class="o">;</span>
+<span class="c1">//...</span>
+<span class="n">img</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Imagem</span><span class="o">(</span><span class="s">"pasta/nomeimagem.jpg"</span><span class="o">);</span>
+
+<span class="c1">//Método para desenhar a imagem em uma posição na tela</span>
+<span class="c1">//img.desenha(int x, int y);</span>
+<span class="n">img</span><span class="o">.</span><span class="na">desenha</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span> 
+
+<span class="c1">//Métodos de acesso à largura e altura da imagem</span>
+<span class="kt">int</span> <span class="n">largura</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">pegaLargura</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">altura</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">pegaAltura</span><span class="o">();</span>
+
+<span class="c1">//Métodos que modificam a largura e altura</span>
+<span class="n">img</span><span class="o">.</span><span class="na">alteraLargura</span><span class="o">(</span> <span class="mi">1</span> <span class="o">);</span> <span class="c1">//Aumenta em 1 pixel a largura da imagem</span>
+<span class="n">img</span><span class="o">.</span><span class="na">alteraAltura</span><span class="o">(</span> <span class="o">-</span><span class="mi">1</span> <span class="o">);</span> <span class="c1">//Diminui em um pixel a altura da imagem</span>
+
+<span class="c1">//img.alteraTamanho(int novaLargura, int nova Altura)</span>
+<span class="n">img</span><span class="o">.</span><span class="na">alteraTamanho</span><span class="o">(</span><span class="mi">48</span><span class="o">,</span> <span class="mi">48</span><span class="o">);</span> <span class="c1">//Redimensiona a imagem para os valores especificados</span>
+
+<span class="c1">//Inverte a imagem</span>
+<span class="n">img</span><span class="o">.</span><span class="na">inverte</span><span class="o">();</span>
+</pre></div>
+
+<h3>Gif</h3>
+
+<p>Um objeto da classe Gif é uma extensão da classe Imagem e tem como única finalidade permitir que um objeto Gif pare de ser desenhado após certo período de tempo. Este recurso é útil por exemplo, em Gif's de explosões que devem parar de ser exibidos após alguns milissegundos.</p>
+
+<div class="highlight"><pre><span class="c1">//new Gif(String caminhoImagem, int tempoParaSumirEmMilissegundos);</span>
+<span class="n">Gif</span> <span class="n">explosao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gif</span><span class="o">(</span><span class="s">"explosao.gif"</span><span class="o">,</span> <span class="mi">2000</span><span class="o">);</span>
+
+<span class="c1">//Além dos métodos de imagem, há um método disponível para saber se o tempo já terminou</span>
+<span class="k">if</span><span class="o">(</span> <span class="n">explosao</span><span class="o">.</span><span class="na">temrinou</span><span class="o">()</span> <span class="o">){</span>
+   <span class="c1">//faz alguma coisa..</span>
+<span class="o">}</span>
+
+<span class="c1">//Outro método útil é o reinicia, que permite reiniciar o contador de tempo do Gif</span>
+<span class="n">explosao</span><span class="o">.</span><span class="na">reinicia</span><span class="o">();</span>
+</pre></div>
+
+<h3>Animação</h3>
+
+<p>Uma animação corresponde a um conjunto de imagens, cada qual representando um quadro, sendo exibidas uma após a outra com um certo intervalo de tempo. Por ser uma coleção de imagens, estão disponíveis alguns métodos que alteram todas as imagens da animação.</p>
+
+<div class="highlight"><pre><span class="c1">//Cria um objeto da classe Animação informando o tempo em milissegundos de intervalo entre as imagens</span>
+ <span class="n">Animacao</span> <span class="n">animacao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Animacao</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
+ <span class="c1">//Adiciona diferentes imagens para a animação</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/chute.png"</span><span class="o">);</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/chute2.png"</span><span class="o">);</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/chute.png"</span><span class="o">);</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/soco_direita.png"</span><span class="o">);</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/soco_esquerda.png"</span><span class="o">);</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">addImagem</span><span class="o">(</span><span class="s">"imagens/ryu/haduken.png"</span><span class="o">);</span>
+ <span class="c1">//Inicia execução da animação em loop, ou seja, quando chegar ao final, recomeça</span>
+ <span class="c1">//Uma forma alternativa é usar o método inicia() apenas.</span>
+ <span class="n">animacao</span><span class="o">.</span><span class="na">iniciaEmLoop</span><span class="o">();</span>
+
+ <span class="c1">//Para demonstrar os demais recursos fazemos um loop que altera a animação conforme as teclas digitadas pelo usuário   </span>
+ <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span> 
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpa</span><span class="o">();</span>
+
+      <span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"esquerda"</span><span class="o">)</span> <span class="o">){</span>
+        <span class="c1">//Diminui em 10 pixels a largura de todas as imagens da animação</span>
+        <span class="n">animacao</span><span class="o">.</span><span class="na">alteraLargura</span><span class="o">(-</span><span class="mi">10</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"direita"</span><span class="o">)</span> <span class="o">){</span>
+        <span class="c1">//Aumenta em 10 pixels a largura de todas as imagens da animação</span>
+        <span class="n">animacao</span><span class="o">.</span><span class="na">alteraLargura</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"cima"</span><span class="o">)</span> <span class="o">){</span>
+        <span class="c1">//Aumenta em 10 pixels a altura de todas as imagens da animação</span>
+        <span class="n">animacao</span><span class="o">.</span><span class="na">alteraAltura</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"baixo"</span><span class="o">)</span> <span class="o">){</span>
+        <span class="c1">//Diminui em 10 pixels a altura de todas as imagens da animação</span>
+        <span class="n">animacao</span><span class="o">.</span><span class="na">alteraAltura</span><span class="o">(-</span><span class="mi">10</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"espaco"</span><span class="o">)</span> <span class="o">){</span>
+        <span class="c1">//Inverte todas as imagens da animação</span>
+        <span class="n">animacao</span><span class="o">.</span><span class="na">inverte</span><span class="o">();</span>
+      <span class="o">}</span>
+      <span class="c1">//Processa a animação para realizar a troca do quadro</span>
+      <span class="n">animacao</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+      <span class="c1">//Desenha a imagem atual da animação no ponto 50, 50 da tela</span>
+      <span class="n">animacao</span><span class="o">.</span><span class="na">desenha</span><span class="o">(</span><span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+
+      <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+    <span class="o">}</span>
+</pre></div>
+
+<h3>Sons</h3>
+
+<p>Um som pode ser executado, parado, reiniciado e executado em loop. Somente estão disponíveis sons no formato Wav. Segue abaixo exemplo de como controlar uma música via comandos do teclado.</p>
+
+<div class="highlight"><pre><span class="c1">//Cria objeto que representa uma música</span>
+<span class="n">Som</span> <span class="n">musica</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Som</span><span class="o">(</span><span class="s">"recursos/aljava.exemplos.som/mario.wav"</span><span class="o">);</span>
+<span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+    <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpa</span><span class="o">();</span>
+
+    <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="s">"Pressione t -&gt; Toca a Musica"</span><span class="o">);</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"t"</span><span class="o">)){</span>
+       <span class="n">musica</span><span class="o">.</span><span class="na">toca</span><span class="o">();</span>
+       <span class="c1">//se preferir, inicie em loop</span>
+       <span class="c1">//musica.loop();</span>
+    <span class="o">}</span>
+
+    <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="s">"Pressione p -&gt; Pausa a Musica"</span><span class="o">);</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"p"</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">musica</span><span class="o">.</span><span class="na">pausa</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">60</span><span class="o">,</span> <span class="s">"Pressione r -&gt; Reinicia a Musica"</span><span class="o">);</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"r"</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">musica</span><span class="o">.</span><span class="na">reinicia</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Outro uso é como sons de notas musicais para simular um violão ou guitarra por exemplo.
+Neste exemplo, para cada tecla digitada um objeto som é criado e executado, assim, uma mesma tecla pode ser pressionada várias vezes para criar diversos objetos do mesmo som.</p>
+
+<p>Variáveis booleanas são utilizadas para garantir que a tecla só pode ser pressionada novamente após ser solta.</p>
+
+<div class="highlight"><pre>         <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">limpa</span><span class="o">();</span>
+
+            <span class="c1">//Tecla Ré</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="s">"Pressione s -&gt; Ré"</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"s"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">sLiberado</span><span class="o">){</span>
+                <span class="n">sLiberado</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="n">Som</span> <span class="n">som</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Som</span><span class="o">(</span><span class="s">"recursos/aljava.exemplos.som/re_piano.wav"</span><span class="o">);</span>
+                <span class="n">som</span><span class="o">.</span><span class="na">toca</span><span class="o">();</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span><span class="o">(!</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"s"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">sLiberado</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">//Tecla Ré</span>
+            <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">texto</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="mi">60</span><span class="o">,</span> <span class="s">"Pressione d -&gt; Fá"</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"d"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">dLiberado</span><span class="o">){</span>
+                <span class="n">dLiberado</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="n">Som</span> <span class="n">som</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Som</span><span class="o">(</span><span class="s">"recursos/aljava.exemplos.som/fa_piano.wav"</span><span class="o">);</span>
+                <span class="n">som</span><span class="o">.</span><span class="na">toca</span><span class="o">();</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span><span class="o">(!</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"d"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">dLiberado</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+
+
+            <span class="n">Alj</span><span class="o">.</span><span class="na">tela</span><span class="o">.</span><span class="na">exibe</span><span class="o">();</span>
+        <span class="o">}</span>
+</pre></div>
+
+<h2>Elementos de Jogo</h2>
+
+<p>As classes desta seção apresentam elementos importantes para o desenvolvimento de jogos, como colisões e cenários.</p>
+
+<p>São apresentados aqui somente os métodos mais importantes. Para mais métodos, verifique o JavaDoc.</p>
+
+<p>Importe as classes desta seção usando <strong>import aljava.jogo.\</strong>*.</p>
+
+<h3>Retangulo</h3>
+
+<p>A Classe Retangulo é a classe base da maioria dos objetos e contém quatro variáveis (x, y, largura e altura). Ela possui métodos de acesso e modificadores para cada uma das 4 variáveis, métodos para movimentar o X e o Y e métodos para colisão. Geralmente você usará esta classe como superclasse de outras</p>
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MeuObjeto</span> <span class="kd">extends</span> <span class="n">Retangulo</span> <span class="o">{</span>
+    <span class="c1">//Código da classe aqui</span>
+<span class="o">}</span>
+
+<span class="c1">//Ao usar o seu objeto, os seguintes métodos da classe Retangulo estarão disponíveis</span>
+<span class="c1">//Você pode criar objetos da classe Retangulo por um construtor vazio ou com quatro parâmetros, um para cada uma das variáveis</span>
+<span class="c1">//MeuObjeto obj = new MeuObjeto(x, y, largura, altura);</span>
+<span class="n">MeuObjeto</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MeuObjeto</span><span class="o">();</span>
+
+<span class="c1">//Métodos de acesso</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="na">pegaX</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="na">pegaY</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">largura</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="na">pegaLargura</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">altura</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="na">pegaAltura</span><span class="o">();</span>
+
+<span class="c1">//Métodos modificadores</span>
+<span class="n">obj</span><span class="o">.</span><span class="na">alteraX</span><span class="o">(</span> <span class="mi">30</span> <span class="o">);</span>
+<span class="n">obj</span><span class="o">.</span><span class="na">alteraY</span><span class="o">(</span> <span class="mi">30</span> <span class="o">);</span>
+<span class="n">obj</span><span class="o">.</span><span class="na">alteraLargura</span><span class="o">(</span> <span class="mi">48</span> <span class="o">);</span>
+<span class="n">obj</span><span class="o">.</span><span class="na">alteraAltura</span><span class="o">(</span> <span class="mi">48</span> <span class="o">);</span>
+</pre></div>
+
+<p>Abaixo, métodos que podem ser usados para movimentar e verificar colisões</p>
+
+<div class="highlight"><pre><span class="c1">//Movimento do X e do Y</span>
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"esquerda"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">obj</span><span class="o">.</span><span class="na">moveX</span><span class="o">(-</span><span class="mi">10</span><span class="o">);</span> <span class="c1">//Move o x dez pixels para a esquerda</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="o">(</span> <span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"baixo"</span><span class="o">)</span> <span class="o">){</span>
+    <span class="n">obj</span><span class="o">.</span><span class="na">moveY</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span> <span class="c1">//Move o y dez pixels para baixo.</span>
+<span class="o">}</span>
+
+<span class="c1">//Colisão.</span>
+
+<span class="c1">//Com outro objeto que também seja um retangulo</span>
+<span class="k">if</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">toca</span><span class="o">(</span> <span class="n">outroObjetoRetangulo</span> <span class="o">)){</span>
+    <span class="c1">//faz alguma coisa</span>
+<span class="o">}</span>
+
+<span class="c1">//Com um determinado ponto, por exemplo, o X, Y do mouse</span>
+<span class="kt">int</span> <span class="n">xMouse</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">x</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">yMouse</span> <span class="o">=</span> <span class="n">Alj</span><span class="o">.</span><span class="na">mouse</span><span class="o">.</span><span class="na">y</span><span class="o">();</span>
+<span class="k">if</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">toca</span><span class="o">(</span><span class="n">xMouse</span><span class="o">,</span> <span class="n">yMouse</span><span class="o">)){</span>
+    <span class="c1">//Faz alguma coisa</span>
+<span class="o">}</span>
+
+</pre></div>
+
+<h3>RetanguloGravidade</h3>
+
+<p>Esta classe estende a classe Retangulo e adiciona métodos para processar a gravidade e realizar pulos.</p>
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MeuObjeto</span> <span class="kd">extends</span> <span class="n">RetanguloGravidade</span> <span class="o">{</span> <span class="cm">/*...*/</span> <span class="o">}</span>
+<span class="c1">//...</span>
+<span class="n">MeuObjeto</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MeuObjeto</span><span class="o">();</span>
+<span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+    <span class="c1">//processa gravidade</span>
+    <span class="n">obj</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+    <span class="c1">//Pula ao pressionar espaço</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">Alj</span><span class="o">.</span><span class="na">tecla</span><span class="o">.</span><span class="na">press</span><span class="o">(</span><span class="s">"espaco"</span><span class="o">)){</span>
+        <span class="c1">//O 15 é a força do pulo</span>
+        <span class="n">obj</span><span class="o">.</span><span class="na">pula</span><span class="o">(</span><span class="mi">15</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Para que a gravidade funciona são necessários o valor do chão e o próprio valor da gravidade. Estes valores podem ser alterados via variáveis públicas estáticas.</p>
+
+<div class="highlight"><pre><span class="c1">//O padrão para o chão é 400</span>
+<span class="n">RetanguloGravidade</span><span class="o">.</span><span class="na">CHAO</span> <span class="o">=</span> <span class="mi">380</span><span class="o">;</span>
+<span class="c1">//O padrão da gravidade é 1</span>
+<span class="n">RetanguloGravidade</span><span class="o">.</span><span class="na">GRAVIDADE</span> <span class="o">=</span> <span class="mf">0.7</span><span class="o">;</span>
+</pre></div>
+
+<h3>CenaComColisao</h3>
+
+<p>Uma CenaComColisao é uma extensão da classe Cena. A classe CenaComColisao se diferencia apenas por acrescentar colisão, porém, como verificou-se que nenhum dos projetos em sala utilizava somente a classe Cena, somente está documentada a classe CenaComColisao.</p>
+
+<p>Uma CenaComColisao consiste em um conjunto de "tiles" (pequenos quadrados representados por imagens) desenhados a partir de um arquivo de configuração e que podem ser sólidos ou não.</p>
+
+<p>Objetos do tipo Retangulo podem ser adicionados ao Cenário e movimentados com ele.</p>
+
+<p>Segue abaixo exemplo de um arquivo de configuração de uma cena:</p>
+
+<p>Arquivo <strong>cena.txt</strong></p>
+
+<div class="highlight"><pre><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+<span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span>
+</pre></div>
+
+<p>Para desenhar este cenário é usado o seguinte código:</p>
+
+<div class="highlight"><pre><span class="n">CenaComColisao</span> <span class="n">cena1</span><span class="o">;</span>
+<span class="c1">//...</span>
+<span class="n">cena1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CenaComColisao</span><span class="o">(</span><span class="s">"cena.txt"</span><span class="o">);</span>
+<span class="c1">//Configura que todos os números 1 usarão a imagem terra.png</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">configTile</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"terra.png"</span><span class="o">);</span>
+<span class="c1">//Configura imagem do número 2 informando o terceiro parâmetro como verdadeiro, isso significa que este bloco é sólido</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">configTile</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"fundo.jpg"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="c1">//Faz uma parede fantasma usando a mesma imagem do bloco sólido, porém, sem solidez</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">configTile</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"fundo.jpg"</span><span class="o">);</span>
+<span class="c1">//Configura o tamanho de cada Tile.</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">tamanhoTiles</span><span class="o">(</span><span class="mi">32</span><span class="o">,</span> <span class="mi">32</span><span class="o">);</span>
+</pre></div>
+
+<p>Além disso podemos adicionar objetos que realizam colisão com os tiles do cenário e objetos que são movimentados junto do cenário, ou seja, se o cenário se mover para a esquerda os objetos se movem junto, executando o efeito dos objetos estarem realmente dentro do cenário. As duas operações são diferentes e são feitas com os seguintes métodos.</p>
+
+<div class="highlight"><pre><span class="c1">//Adiciona objetos para realizar colisão com o cenário</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">adicionaObjeto</span><span class="o">(</span><span class="n">jogador</span><span class="o">);</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">adicionaObjeto</span><span class="o">(</span><span class="n">inimigo1</span><span class="o">);</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">adicionaObjeto</span><span class="o">(</span><span class="n">inimigo2</span><span class="o">);</span>
+
+<span class="c1">//Adiciona objetos que se movimentarão junto do cenário</span>
+<span class="c1">//O jogador não é incluído porque ele deve ficar fixo na tela e quem se move na verdad eé o cenário. Esta tarefa é feita pela classe camera.</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">moveComCenario</span><span class="o">(</span><span class="n">inimigo1</span><span class="o">);</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">moveComCenario</span><span class="o">(</span><span class="n">inimigo2</span><span class="o">);</span>         
+</pre></div>
+
+<p><strong>Obs</strong>: Todos os objetos adicionados devem ser do tipo Retangulo.</p>
+
+<p>Por fim, no loop do jogo, o cenário deve ser processado para realizar os cálculos de colisão e movimento dos objetos.</p>
+
+<div class="highlight"><pre><span class="o">...</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+<span class="n">cena1</span><span class="o">.</span><span class="na">desenha</span><span class="o">();</span>
+<span class="o">...</span>
+</pre></div>
+
+<h3>Camera</h3>
+
+<p>A classe Camera implementa a lógica de, a partir do movimento de um determinado retangulo, movimentar o cenário para ter a sensação de que existe uma câmera acompanhando o objeto.</p>
+
+<p>Para usá-la, basta informar um objeto da classe Cena e outro da Classe Retangulo.</p>
+
+<div class="highlight"><pre><span class="n">Camera</span> <span class="n">cam</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Camera</span><span class="o">(</span><span class="n">cena1</span><span class="o">,</span> <span class="n">jogador</span><span class="o">);</span>
+</pre></div>
+
+<p>Para que os cálculos de acompanhamento da câmera sejam realizados, basta executar o método "processa".</p>
+
+<div class="highlight"><pre><span class="o">...</span>
+<span class="n">cam</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+<span class="o">...</span>
+</pre></div>
+
+<h2>Framework</h2>
+
+<p>As classes desta seção devem usadas em conjunto para construir uma arquitetura escalável de jogo, com diversas fases e objetos.</p>
+
+<p>Importe as classes desta seção usando <strong>import aljava.jogo.\</strong>*.</p>
+
+<h3>Motor</h3>
+
+<p>A classe motor gera objetos que controlam o fluxo principal do jogo e realizam a troca de fases. </p>
+
+<h4>MotorSingleton</h4>
+
+<p>Por jogo, é ideal que só exista um objeto da classe motor disponível. Para isso, esta classe implementa o padrão singleton, que garante apenas um único objeto disponível para toda a aplicação. De qualquer local do código o motor do jogo pode ser recuperado através de:</p>
+
+<div class="highlight"><pre><span class="n">Motor</span> <span class="n">motor</span> <span class="o">=</span> <span class="n">MotorSingleton</span><span class="o">.</span><span class="na">pegaInstancia</span><span class="o">();</span>
+</pre></div>
+
+<h4>Adicionando fases</h4>
+
+<p>Para incluir fases no motor basta usar o método "adicionaFase" informando a chave e o correspondente objeto que implementa a interface Fase.</p>
+
+<div class="highlight"><pre>        <span class="c1">//Cria objetos de classes que implementam a interface Fase</span>
+        <span class="n">TelaInicial</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TelaInicial</span><span class="o">(</span> <span class="n">senhorq</span> <span class="o">);</span>
+        <span class="n">Fase1</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Fase1</span><span class="o">(</span> <span class="n">senhorq</span> <span class="o">);</span>
+        <span class="n">Fase2</span> <span class="n">f2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Fase2</span><span class="o">(</span> <span class="n">senhorq</span> <span class="o">);</span>
+        <span class="n">FaseChefao</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FaseChefao</span><span class="o">(</span> <span class="n">senhorq</span> <span class="o">);</span>
+
+        <span class="c1">//Recupera objeto motor</span>
+        <span class="n">Motor</span> <span class="n">motorJogo</span> <span class="o">=</span> <span class="n">MotorSingleton</span><span class="o">.</span><span class="na">pegaInstancia</span><span class="o">();</span>
+        <span class="c1">//Adiciona as fases existentes,</span>
+        <span class="c1">//todas implementando a interface Fase</span>
+        <span class="n">motorJogo</span><span class="o">.</span><span class="na">adicionaFase</span><span class="o">(</span><span class="s">"telaInicial"</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+        <span class="n">motorJogo</span><span class="o">.</span><span class="na">adicionaFase</span><span class="o">(</span><span class="s">"fase1"</span><span class="o">,</span> <span class="n">f</span><span class="o">);</span>
+        <span class="n">motorJogo</span><span class="o">.</span><span class="na">adicionaFase</span><span class="o">(</span><span class="s">"fase2"</span><span class="o">,</span> <span class="n">f2</span><span class="o">);</span>
+        <span class="n">motorJogo</span><span class="o">.</span><span class="na">adicionaFase</span><span class="o">(</span><span class="s">"faseChefao"</span><span class="o">,</span> <span class="n">c</span><span class="o">);</span>
+</pre></div>
+
+<h4>Executando</h4>
+
+<p>Para executar o motor, basta informar a fase inicial e opcionalmente, o número de quadros por segundo.</p>
+
+<div class="highlight"><pre><span class="n">motorJogo</span><span class="o">.</span><span class="na">defineFaseInicial</span><span class="o">(</span><span class="s">"telaInicial"</span><span class="o">);</span>
+<span class="n">motorJogo</span><span class="o">.</span><span class="na">alteraQuadrosPorSegundo</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+<span class="n">motorJogo</span><span class="o">.</span><span class="na">executa</span><span class="o">();</span>
+</pre></div>
+
+<h4>Troca de fases</h4>
+
+<p>Para trocar de fase, basta executar o seguinte método, informando a chave da próxima fase:</p>
+
+<div class="highlight"><pre><span class="n">Motor</span> <span class="n">motorJogo</span> <span class="o">=</span> <span class="n">MotorSingleton</span><span class="o">.</span><span class="na">pegaInstancia</span><span class="o">();</span>
+<span class="n">motorJogo</span><span class="o">.</span><span class="na">defineProximaFase</span><span class="o">(</span><span class="s">"fase2"</span><span class="o">);</span>
+</pre></div>
+
+<h3>Interface Fase</h3>
+
+<p>A interface Fase contém três métodos que devem ser implementados: </p>
+
+<p>1) <strong>processa</strong>: Contém a lógica da fase;
+2) <strong>desenha</strong>: desenha os objetos da fase;
+3) <strong>inicia</strong>: Método executado sempre antes de de fazer o primeiro processamento da fase. Também é executado quando a fase é definida como "próxima".</p>
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MinhaFase</span> <span class="kd">implements</span> <span class="n">Fase</span> <span class="o">{</span>
+    <span class="c1">//...</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">inicia</span><span class="o">(){</span>
+        <span class="c1">//Garate que sempre que voltar para essa fase o jogador iniciará em X = 40</span>
+        <span class="n">jogador</span><span class="o">.</span><span class="na">alteraX</span><span class="o">(</span><span class="mi">40</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processa</span><span class="o">(){</span>
+        <span class="n">jogador</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+        <span class="n">inimigo</span><span class="o">.</span><span class="na">processa</span><span class="o">();</span>
+
+        <span class="n">processaColisoes</span><span class="o">();</span>
+        <span class="n">verificaVitoria</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">desenha</span><span class="o">(){</span>
+        <span class="n">jogador</span><span class="o">.</span><span class="na">desenha</span><span class="o">();</span>
+        <span class="n">inimigo</span><span class="o">.</span><span class="na">desenha</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>Classe abstrata ObjetoJogo</h3>
+
+<p>Esta classe contém dois métodos abstratos, o <strong>processa</strong> para a lógica do objeto e o <strong>desenha</strong>. A classe estende a classe "RetanguloGravidade" e tem métodos para informar e recuperar se um objeto está "vivo" no jogo.</p>
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tiro</span> <span class="kd">extends</span> <span class="n">ObjetoJogo</span> <span class="o">{</span>
+    <span class="c1">//...</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processa</span><span class="o">(){</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">desenha</span><span class="o">(){</span>
+        <span class="n">Alj</span><span class="o">.</span><span class="na">cor</span><span class="o">.</span><span class="na">nome</span><span class="o">(</span><span class="s">"preto"</span><span class="o">);</span>
+        <span class="n">Alj</span><span class="o">.</span><span class="na">desenha</span><span class="o">.</span><span class="na">oval</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">largura</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>Classes Extras</h2>
+
+<h3>Contador Tempo</h3>
+
+<p>Esta classe permite criar um contador de milissegundos.</p>
+
+<div class="highlight"><pre><span class="c1">//Cria um objeto para contar o tempo a cada 2 segundos</span>
+<span class="n">ContadorTempo</span> <span class="n">cont</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ContadorTempo</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+
+<span class="k">if</span><span class="o">(</span><span class="n">cont</span><span class="o">.</span><span class="na">terminou</span><span class="o">()){</span>
+    <span class="c1">//Faz alguma coisa e..</span>
+    <span class="n">cont</span><span class="o">.</span><span class="na">reinicia</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>Conclusão</h2>
+
+<p>Todos os comandos e classes aqui apresnetados tem como mesmo objetivo, tornar a programação em java um pouco mais divertida e prazerosa para quem está começando.</p>
+
+<p>Assim, nossos primeiros programas podem ganhar um pouco mais de vida e dinamismo e o ensino fica melhor também para o professor que pode ir muito além do tradicional.</p>
+
+<p>E tudo isso, ainda usando Java, uma linguagem poderosa e profissional.
+Espero que gostem.</p>
+
+<h3>Inspiração e agradecimentos</h3>
+
+<p>À criatividade e disposição dos meus alunos que tem encarado comigo o desafio de aprender programação de um modo que vale a pena, divertido, voltado para aproveitar o máximo do potencial criativo que o computador pode nos oferecer.</p>
+
+<p>Ao SENAI São José e à Márcia Cristina (coordenadora) pela confiança e pelo excepcional trabalho como coordenadora do curso técnico de programação articulado com o ensino médio.</p>
+
+<p>Aos projetos BlueJ, Greenfoot, idraw e Processing.</p>
+
+<p>Ao orientador do meu TCC, professor Ricardo Pereira e Silva, UFSC e aos demais professores do curso de Sistemas de Informação que contribuíram para o meu aprendizado e desenvolvimento.</p>
+
+<p>Por fim, à minha amada família, Suélen e Kainan, simplesmente pelo que são.!</p>
+
+<p>Linhas apenas,
+para completar,
+1000 linhas no arquivo. até mais.</p>
       </section>
 
     </div>

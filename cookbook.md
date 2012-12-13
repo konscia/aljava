@@ -1,3 +1,0 @@
-# Livro de Receitas
-
-Acho que encontrei meu editor de documentação de código...
